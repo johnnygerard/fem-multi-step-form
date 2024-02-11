@@ -1,6 +1,6 @@
 export type Plan = {
-  icon: string;
-  name: string;
-  monthlyPrice: number;
-  yearlyPrice: number;
+  readonly icon: string;
+  readonly name: string;
+  readonly monthlyPrice: number;
+  readonly yearlyPrice: number;
 };

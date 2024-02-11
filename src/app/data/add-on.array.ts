@@ -21,4 +21,5 @@ export const addOns: AddOn[] = [
   description,
   monthlyPrice,
   yearlyPrice: monthlyPrice * 10, // 2 months free
+  selected: false
 }));

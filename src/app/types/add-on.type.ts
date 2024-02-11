@@ -1,6 +1,7 @@
 export type AddOn = {
-  name: string;
-  description: string;
-  monthlyPrice: number;
-  yearlyPrice: number;
+  readonly name: string;
+  readonly description: string;
+  readonly monthlyPrice: number;
+  readonly yearlyPrice: number;
+  selected: boolean;
 };

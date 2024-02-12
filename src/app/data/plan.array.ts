@@ -19,9 +19,7 @@ export const plans: Plan[] = [
     name: 'Pro',
     monthlyPrice: 15,
   },
-].map(({ icon, name, monthlyPrice }) => ({
-  icon,
-  name,
-  monthlyPrice,
-  yearlyPrice: monthlyPrice * 10, // 2 months free
+].map(input => ({
+  ...input,
+  yearlyPrice: input.monthlyPrice * 10, // 2 months free
 }));

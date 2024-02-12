@@ -16,10 +16,8 @@ export const addOns: AddOn[] = [
     description: 'Custom theme on your profile',
     monthlyPrice: 2,
   }
-].map(({ name, description, monthlyPrice }) => ({
-  name,
-  description,
-  monthlyPrice,
-  yearlyPrice: monthlyPrice * 10, // 2 months free
+].map(input => ({
+  ...input,
+  yearlyPrice: input.monthlyPrice * 10, // 2 months free
   selected: false
 }));

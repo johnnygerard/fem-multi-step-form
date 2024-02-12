@@ -1,12 +1,11 @@
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { addOns } from './data/add-on.array';
 import { plans } from './data/plan.array';
 import { StepperComponent } from './stepper/stepper.component';
 import { AddOn } from './types/add-on.class';
-import { BillingCycle } from './types/billing-cycle.type';
 import { Plan } from './types/plan.class';
 
 @Component({
@@ -23,8 +22,6 @@ import { Plan } from './types/plan.class';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  defaultBillingCycle: BillingCycle = 'monthly';
-  billingCycleIsMonthly = this.defaultBillingCycle === 'monthly';
   addOns: AddOn[] = addOns;
   plans: Plan[] = plans;
 
@@ -39,13 +36,13 @@ export class AppComponent {
 
   planControls = this._formBuilder.group({
     plan: [null as Plan | null, Validators.required],
-    billingCycle: this.defaultBillingCycle,
+    billingCycleIsMonthly: true,
   });
 
-  constructor(private _formBuilder: FormBuilder) {
-    this.planControls.controls.billingCycle.valueChanges.subscribe(
-      value => this.billingCycleIsMonthly = value === 'monthly'
-    );
+  constructor(private _formBuilder: FormBuilder) { }
+
+  get billingCycleIsMonthly(): boolean | null {
+    return this.planControls.controls.billingCycleIsMonthly.value;
   }
 
   get selectedAddOns(): AddOn[] {
@@ -70,7 +67,11 @@ export class AppComponent {
     return this.totalMonthlyPrice * 10; // 2 months free
   }
 
-  toggleAddOn(addOn: AddOn) {
+  toggleAddOn(addOn: AddOn): void {
     addOn.selected = !addOn.selected;
+  }
+
+  setBillingCycle(isMonthly: boolean): void {
+    this.planControls.controls.billingCycleIsMonthly.setValue(isMonthly);
   }
 }

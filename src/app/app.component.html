@@ -8,15 +8,15 @@
     <form [formGroup]="credentialControls">
       <label>
         <span>Name</span>
-        <input formControlName="name" placeholder="e.g. Stephen King" />
+        <input formControlName="name" placeholder="e.g. Stephen King">
       </label>
       <label>
         <span>Email Address</span>
-        <input type="email" formControlName="email" placeholder="e.g. stephenking@lorem.com" />
+        <input type="email" formControlName="email" placeholder="e.g. stephenking@lorem.com">
       </label>
       <label>
         <span>Phone Number</span>
-        <input type="tel" formControlName="phone" placeholder="e.g. +1 234 567 890" />
+        <input type="tel" formControlName="phone" placeholder="e.g. +1 234 567 890">
       </label>
     </form>
   </cdk-step>
@@ -28,7 +28,7 @@
     </hgroup>
     <form [formGroup]="planControls">
       <label *ngFor="let plan of plans">
-        <input type="radio" [value]="plan" formControlName="plan" />
+        <input type="radio" [value]="plan" formControlName="plan">
         <ng-container [ngComponentOutlet]="plan.icon" />
         <div>
           <span>{{ plan.name }}</span>
@@ -36,10 +36,11 @@
           <span *ngIf="!billingCycleIsMonthly">2 months free</span>
         </div>
       </label>
-      <label *ngFor="let billingCycle of ['monthly', 'yearly']">
-        <span>{{ billingCycle | titlecase }}</span>
-        <input type="radio" [value]="billingCycle" formControlName="billingCycle">
-      </label>
+      <div>
+        <button type="button" (click)="setBillingCycle(true)">Monthly</button>
+        <input type="checkbox" formControlName="billingCycleIsMonthly">
+        <button type="button" (click)="setBillingCycle(false)">Yearly</button>
+      </div>
     </form>
   </cdk-step>
   <!-- STEP 3 ********************************************************************************** -->

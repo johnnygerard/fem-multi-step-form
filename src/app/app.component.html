@@ -1,1 +1,87 @@
-<p>Website under development</p>
+<app-stepper [linear]="true" #stepper>
+  <!-- STEP 1 ********************************************************************************** -->
+  <cdk-step label="Your Info" [stepControl]="credentialControls">
+    <hgroup>
+      <h1>Personal info</h1>
+      <p>Please provide your name, email address, and phone number.</p>
+    </hgroup>
+    <form [formGroup]="credentialControls">
+      <label>
+        <span>Name</span>
+        <input formControlName="name" placeholder="e.g. Stephen King" />
+      </label>
+      <label>
+        <span>Email Address</span>
+        <input type="email" formControlName="email" placeholder="e.g. stephenking@lorem.com" />
+      </label>
+      <label>
+        <span>Phone Number</span>
+        <input type="tel" formControlName="phone" placeholder="e.g. +1 234 567 890" />
+      </label>
+    </form>
+  </cdk-step>
+  <!-- STEP 2 ********************************************************************************** -->
+  <cdk-step label="Select Plan" [stepControl]="planControls">
+    <hgroup>
+      <h1>Select your plan</h1>
+      <p>You have the option of monthly or yearly billing.</p>
+    </hgroup>
+    <form [formGroup]="planControls">
+      <label *ngFor="let plan of plans">
+        <input type="radio" [value]="plan" formControlName="plan" />
+        <ng-container [ngComponentOutlet]="plan.icon" />
+        <div>
+          <span>{{ plan.name }}</span>
+          <span>{{ billingCycleIsMonthly ? plan.monthlyPrice : plan.yearlyPrice }}</span>
+          <span *ngIf="!billingCycleIsMonthly">2 months free</span>
+        </div>
+      </label>
+      <label *ngFor="let billingCycle of ['monthly', 'yearly']">
+        <span>{{ billingCycle | titlecase }}</span>
+        <input type="radio" [value]="billingCycle" formControlName="billingCycle">
+      </label>
+    </form>
+  </cdk-step>
+  <!-- STEP 3 ********************************************************************************** -->
+  <cdk-step label="Add-Ons" optional>
+    <hgroup>
+      <h1>Pick add-ons</h1>
+      <p>Add-ons help enhance your gaming experience.</p>
+    </hgroup>
+    <form>
+      <label *ngFor="let addOn of addOns">
+        <input type="checkbox" [checked]="addOn.selected" (change)="toggleAddOn(addOn)">
+        <div>
+          <span>{{ addOn.name }}</span>
+          <span>{{ addOn.description }}</span>
+        </div>
+        <span>{{ billingCycleIsMonthly ? addOn.monthlyPrice : addOn.yearlyPrice }}</span>
+      </label>
+    </form>
+  </cdk-step>
+  <!-- STEP 4 ********************************************************************************** -->
+  <cdk-step label="Summary">
+    <hgroup>
+      <h1>Finishing up</h1>
+      <p>Double-check everything looks OK before confirming.</p>
+    </hgroup>
+    <div *ngIf="planControls.controls.plan.value as plan">
+      <div>
+        <span>{{ plan.name }} ({{ billingCycleIsMonthly ? 'Monthly' : 'Yearly' }})</span>
+        <button type="button" (click)="stepper.selectedIndex = 1">Change</button>
+      </div>
+      <span>{{ billingCycleIsMonthly ? plan.monthlyPrice : plan.yearlyPrice }}</span>
+    </div>
+    <ng-container *ngIf="selectedAddOns.length">
+      <hr>
+      <div *ngFor="let addOn of selectedAddOns">
+        <span>{{ addOn.name }}</span>
+        <span>{{ billingCycleIsMonthly ? addOn.monthlyPrice : addOn.yearlyPrice }}</span>
+      </div>
+    </ng-container>
+    <div class="total">
+      <span>Total (per {{ billingCycleIsMonthly ? 'month' : 'year' }})</span>
+      <span>{{ totalPrice }}</span>
+    </div>
+  </cdk-step>
+</app-stepper>

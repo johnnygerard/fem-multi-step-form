@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CdkStepper, CdkStepperModule } from '@angular/cdk/stepper';
 import { CommonModule } from '@angular/common';
 
@@ -16,4 +16,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './stepper.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StepperComponent extends CdkStepper { }
+export class StepperComponent extends CdkStepper {
+  @Input({ required: true }) subscribed!: boolean;
+}

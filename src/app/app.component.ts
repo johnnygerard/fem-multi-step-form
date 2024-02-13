@@ -28,7 +28,12 @@ export class AppComponent {
   readonly PLUS = '+';
   billingCycleIsMonthly = true;
   addOns: AddOn[] = addOns;
+  selectedAddOns: AddOn[] = [];
   plans: Plan[] = plans;
+  totalPrice: Price = {
+    monthly: 0,
+    yearly: 0,
+  };
 
   credentialControls = this._formBuilder.group({
     name: ['', Validators.required],
@@ -45,31 +50,42 @@ export class AppComponent {
   });
 
   constructor(private _formBuilder: FormBuilder) {
+    // Update billing cycle on change
     this.planControls.controls.billingCycleIsMonthly.valueChanges.subscribe(
       (value: boolean | null) => {
         if (value !== null) this.billingCycleIsMonthly = value;
       }
     );
-  }
 
-  get selectedAddOns(): AddOn[] {
-    return this.addOns.filter(addOn => addOn.selected);
-  }
-
-  get totalPrice(): Price {
-    const planPrice = this.planControls.controls.plan.value?.price.monthly ?? 0;
-    const totalMonthlyPrice = this.selectedAddOns.reduce(
-      (sum, addOn) => sum + addOn.price.monthly, planPrice
+    // Update total price on plan selection
+    this.planControls.controls.plan.valueChanges.subscribe(
+      (plan: Plan | null) => {
+        if (plan) this.totalPrice = this.#computeTotalPrice();
+      }
     );
-
-    return {
-      monthly: totalMonthlyPrice,
-      yearly: totalMonthlyPrice * 10, // 2 months free
-    };
   }
 
   toggleAddOn(addOn: AddOn): void {
     addOn.selected = !addOn.selected;
+
+    // Recompute selected add-ons while preserving the order
+    this.selectedAddOns = this.addOns.filter(addOn => addOn.selected);
+
+    // Recompute the total price
+    this.totalPrice = this.#computeTotalPrice();
+  }
+
+  #computeTotalPrice(): Price {
+    const plan = this.planControls.controls.plan.value as Plan;
+    const monthlyTotalPrice = this.selectedAddOns.reduce(
+      (sum, selectedAddOn) => sum + selectedAddOn.price.monthly,
+      plan.price.monthly
+    );
+
+    return {
+      monthly: monthlyTotalPrice,
+      yearly: monthlyTotalPrice * 10, // 2 months free
+    };
   }
 
   setBillingCycle(isMonthly: boolean): void {

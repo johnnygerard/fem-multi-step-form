@@ -26,6 +26,7 @@ import { Price } from './types/price.type';
 })
 export class AppComponent {
   readonly PLUS = '+';
+  billingCycleIsMonthly = true;
   addOns: AddOn[] = addOns;
   plans: Plan[] = plans;
 
@@ -40,13 +41,15 @@ export class AppComponent {
 
   planControls = this._formBuilder.group({
     plan: [null as Plan | null, Validators.required],
-    billingCycleIsMonthly: true,
+    billingCycleIsMonthly: this.billingCycleIsMonthly,
   });
 
-  constructor(private _formBuilder: FormBuilder) { }
-
-  get billingCycleIsMonthly(): boolean {
-    return this.planControls.controls.billingCycleIsMonthly.value!;
+  constructor(private _formBuilder: FormBuilder) {
+    this.planControls.controls.billingCycleIsMonthly.valueChanges.subscribe(
+      (value: boolean | null) => {
+        if (value !== null) this.billingCycleIsMonthly = value;
+      }
+    );
   }
 
   get selectedAddOns(): AddOn[] {

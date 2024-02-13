@@ -1,33 +1,12 @@
 <ol class="steps">
-  <li class="step" [class.active]="i === selectedIndex" *ngFor="let step of steps; index as i">
-    <div class="step-number">{{ i + 1 }}</div>
-    <div class="step-labels">
-      <span class="step-label-numeric">Step {{ i + 1 }}</span>
-      <span class="step-label">{{ step.label }}</span>
-    </div>
-  </li>
+  <ng-container *ngFor="let step of steps; index as i">
+    <li class="step" [class.active]="i === selectedIndex" *ngIf="step !== steps.last">
+      <div class="step-number">{{ i + 1 }}</div>
+      <div class="step-labels">
+        <span class="step-label-numeric">Step {{ i + 1 }}</span>
+        <span class="step-label">{{ step.label }}</span>
+      </div>
+    </li>
+  </ng-container>
 </ol>
-<ng-container *ngIf="!hasSubscribed; else confirmation">
-  <ng-container *ngTemplateOutlet="selected?.content ?? null" />
-  <footer>
-    <button class="button-previous" *ngIf="selectedIndex" type="button" cdkStepperPrevious>
-      Go Back
-    </button>
-    <button class="button-next" *ngIf="selectedIndex < steps.length - 1; else confirmButton"
-        type="button" cdkStepperNext>
-      Next Step
-    </button>
-  </footer>
-</ng-container>
-
-<ng-template #confirmButton>
-  <button class="button-confirm" type="button" (click)="subscribe()">Confirm</button>
-</ng-template>
-
-<ng-template #confirmation>
-  <h1>Thank you!</h1>
-  <p>
-    Thanks for confirming your subscription! We hope you have fun using our platform. If you ever
-    need support, please feel free to email us at support&#64;loremgaming.com.
-  </p>
-</ng-template>
+<ng-container *ngTemplateOutlet="selected?.content ?? null" />

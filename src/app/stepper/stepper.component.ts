@@ -16,10 +16,4 @@ import { CommonModule } from '@angular/common';
   styleUrl: './stepper.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class StepperComponent extends CdkStepper {
-  hasSubscribed = false;
-
-  subscribe(): void {
-    this.hasSubscribed = true;
-  }
-}
+export class StepperComponent extends CdkStepper { }

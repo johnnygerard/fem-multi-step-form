@@ -36,6 +36,7 @@
         </div>
         <input type="tel" formControlName="phone" placeholder="e.g. +1 234 567 890">
       </label>
+      <button class="button-next" cdkStepperNext>Next Step</button>
     </form>
   </cdk-step>
   <!-- STEP 2 ********************************************************************************** -->
@@ -59,6 +60,10 @@
         <input type="checkbox" formControlName="billingCycle">
         <button type="button" (click)="setBillingCycle(false)">Yearly</button>
       </div>
+      <div>
+        <button class="button-previous" type="button" cdkStepperPrevious>Go Back</button>
+        <button class="button-next" cdkStepperNext>Next Step</button>
+      </div>
     </form>
   </cdk-step>
   <!-- STEP 3 ********************************************************************************** -->
@@ -76,6 +81,10 @@
         </div>
         <span>{{ addOn.price | price:isMonthlyBilling:PLUS }}</span>
       </label>
+      <div>
+        <button class="button-previous" type="button" cdkStepperPrevious>Go Back</button>
+        <button class="button-next" cdkStepperNext>Next Step</button>
+      </div>
     </form>
   </cdk-step>
   <!-- STEP 4 ********************************************************************************** -->
@@ -102,6 +111,18 @@
       <span>Total (per {{ isMonthlyBilling ? 'month' : 'year' }})</span>
       <span>{{ totalPrice | price:isMonthlyBilling }}</span>
     </div>
+    <div>
+      <button class="button-previous" type="button" cdkStepperPrevious>Go Back</button>
+      <button class="button-confirm" type="button" cdkStepperNext>Confirm</button>
+    </div>
+  </cdk-step>
+  <!-- STEP 5 ********************************************************************************** -->
+  <cdk-step>
+    <h1>Thank you!</h1>
+    <p>
+      Thanks for confirming your subscription! We hope you have fun using our platform. If you ever
+      need support, please feel free to email us at support&#64;loremgaming.com.
+    </p>
   </cdk-step>
 </app-stepper>
 

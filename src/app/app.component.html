@@ -7,15 +7,33 @@
     </hgroup>
     <form [formGroup]="credentialControls">
       <label>
-        <span>Name</span>
+        <div>
+          <span>Name</span>
+          <ng-container *ngIf="isRequired(credentialControls.controls.name)">
+            <ng-container *ngTemplateOutlet="required" />
+          </ng-container>
+        </div>
         <input formControlName="name" placeholder="e.g. Stephen King">
       </label>
       <label>
-        <span>Email Address</span>
+        <div>
+          <span>Email Address</span>
+          <ng-container *ngIf="isRequired(emailControl)">
+            <ng-container *ngTemplateOutlet="required" />
+          </ng-container>
+          <ng-container *ngIf="emailControl.hasError('email') && emailControl.touched">
+            <span class="error">Invalid email</span>
+          </ng-container>
+        </div>
         <input type="email" formControlName="email" placeholder="e.g. stephenking@lorem.com">
       </label>
       <label>
-        <span>Phone Number</span>
+        <div>
+          <span>Phone Number</span>
+          <ng-container *ngIf="isRequired(credentialControls.controls.phone)">
+            <ng-container *ngTemplateOutlet="required" />
+          </ng-container>
+        </div>
         <input type="tel" formControlName="phone" placeholder="e.g. +1 234 567 890">
       </label>
     </form>
@@ -86,3 +104,7 @@
     </div>
   </cdk-step>
 </app-stepper>
+
+<ng-template #required>
+  <span class="error">This field is required</span>
+</ng-template>

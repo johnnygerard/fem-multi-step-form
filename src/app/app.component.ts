@@ -44,6 +44,8 @@ export class AppComponent {
     phone: ['', Validators.required],
   });
 
+  emailControl = this.credentialControls.controls.email;
+
   planControls = this._formBuilder.group({
     plan: [null as Plan | null, Validators.required],
     billingCycle: this.isMonthlyBilling,
@@ -56,6 +58,10 @@ export class AppComponent {
     );
 
     this.#planControl.valueChanges.subscribe(_ => this.#recomputeTotalPrice());
+  }
+
+  isRequired(control: FormControl): boolean {
+    return control.hasError('required') && control.touched;
   }
 
   get #billingControl(): FormControl<boolean | null> {

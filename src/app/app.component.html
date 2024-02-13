@@ -32,7 +32,7 @@
         <ng-container [ngComponentOutlet]="plan.icon" />
         <div>
           <span>{{ plan.name }}</span>
-          <span>{{ billingCycleIsMonthly ? plan.monthlyPrice : plan.yearlyPrice }}</span>
+          <span>{{ plan.price | price:billingCycleIsMonthly }}</span>
           <span *ngIf="!billingCycleIsMonthly">2 months free</span>
         </div>
       </label>
@@ -56,7 +56,7 @@
           <span>{{ addOn.name }}</span>
           <span>{{ addOn.description }}</span>
         </div>
-        <span>{{ billingCycleIsMonthly ? addOn.monthlyPrice : addOn.yearlyPrice }}</span>
+        <span>{{ addOn.price | price:billingCycleIsMonthly:PLUS }}</span>
       </label>
     </form>
   </cdk-step>
@@ -71,18 +71,18 @@
         <span>{{ plan.name }} ({{ billingCycleIsMonthly ? 'Monthly' : 'Yearly' }})</span>
         <button type="button" (click)="stepper.selectedIndex = 1">Change</button>
       </div>
-      <span>{{ billingCycleIsMonthly ? plan.monthlyPrice : plan.yearlyPrice }}</span>
+      <span>{{ plan.price | price:billingCycleIsMonthly }}</span>
     </div>
     <ng-container *ngIf="selectedAddOns.length">
       <hr>
       <div *ngFor="let addOn of selectedAddOns">
         <span>{{ addOn.name }}</span>
-        <span>{{ billingCycleIsMonthly ? addOn.monthlyPrice : addOn.yearlyPrice }}</span>
+        <span>{{ addOn.price | price:billingCycleIsMonthly:PLUS }}</span>
       </div>
     </ng-container>
     <div class="total">
       <span>Total (per {{ billingCycleIsMonthly ? 'month' : 'year' }})</span>
-      <span>{{ totalPrice }}</span>
+      <span>{{ totalPrice | price:billingCycleIsMonthly }}</span>
     </div>
   </cdk-step>
 </app-stepper>

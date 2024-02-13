@@ -4,7 +4,7 @@ import { ProSvgComponent } from "../svg/pro-svg.component";
 import { Plan } from "../types/plan.class";
 
 export const plans: Plan[] = [
-  new Plan('Arcade', 9, ArcadeSvgComponent),
-  new Plan('Advanced', 12, AdvancedSvgComponent),
-  new Plan('Pro', 15, ProSvgComponent),
+  new Plan('Arcade', ArcadeSvgComponent, 9),
+  new Plan('Advanced', AdvancedSvgComponent, 12),
+  new Plan('Pro', ProSvgComponent, 15),
 ];

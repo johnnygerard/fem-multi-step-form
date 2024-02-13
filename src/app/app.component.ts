@@ -1,12 +1,14 @@
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { addOns } from './data/add-on.array';
 import { plans } from './data/plan.array';
 import { StepperComponent } from './stepper/stepper.component';
 import { AddOn } from './types/add-on.class';
 import { Plan } from './types/plan.class';
+import { PricePipe } from './price.pipe';
+import { Price } from './types/price.type';
 
 @Component({
   selector: 'app-root',
@@ -16,12 +18,14 @@ import { Plan } from './types/plan.class';
     CdkStepperModule,
     ReactiveFormsModule,
     StepperComponent,
+    PricePipe,
     TitleCasePipe,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+  readonly PLUS = '+';
   addOns: AddOn[] = addOns;
   plans: Plan[] = plans;
 
@@ -41,30 +45,24 @@ export class AppComponent {
 
   constructor(private _formBuilder: FormBuilder) { }
 
-  get billingCycleIsMonthly(): boolean | null {
-    return this.planControls.controls.billingCycleIsMonthly.value;
+  get billingCycleIsMonthly(): boolean {
+    return this.planControls.controls.billingCycleIsMonthly.value!;
   }
 
   get selectedAddOns(): AddOn[] {
     return this.addOns.filter(addOn => addOn.selected);
   }
 
-  get totalPrice(): number {
-    return this.billingCycleIsMonthly
-      ? this.totalMonthlyPrice
-      : this.totalYearlyPrice;
-  }
-
-  get totalMonthlyPrice(): number {
-    const planPrice = this.planControls.controls.plan.value?.monthlyPrice ?? 0;
-
-    return this.selectedAddOns.reduce(
-      (sum, addOn) => sum + addOn.monthlyPrice, planPrice
+  get totalPrice(): Price {
+    const planPrice = this.planControls.controls.plan.value?.price.monthly ?? 0;
+    const totalMonthlyPrice = this.selectedAddOns.reduce(
+      (sum, addOn) => sum + addOn.price.monthly, planPrice
     );
-  }
 
-  get totalYearlyPrice(): number {
-    return this.totalMonthlyPrice * 10; // 2 months free
+    return {
+      monthly: totalMonthlyPrice,
+      yearly: totalMonthlyPrice * 10, // 2 months free
+    };
   }
 
   toggleAddOn(addOn: AddOn): void {

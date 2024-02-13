@@ -1,1 +1,131 @@
-<p>Website under development</p>
+<app-stepper [linear]="true" #stepper>
+  <!-- STEP 1 ********************************************************************************** -->
+  <cdk-step label="Your Info" [stepControl]="credentialControls">
+    <hgroup>
+      <h1>Personal info</h1>
+      <p>Please provide your name, email address, and phone number.</p>
+    </hgroup>
+    <form [formGroup]="credentialControls" #credentialForm="ngForm">
+      <label>
+        <div>
+          <span>Name</span>
+          <ng-container *ngIf="isRequired(credentialControls.controls.name)">
+            <ng-container *ngTemplateOutlet="required" />
+          </ng-container>
+        </div>
+        <input formControlName="name" placeholder="e.g. Stephen King">
+      </label>
+      <label>
+        <div>
+          <span>Email Address</span>
+          <ng-container *ngIf="isRequired(emailControl)">
+            <ng-container *ngTemplateOutlet="required" />
+          </ng-container>
+          <ng-container *ngIf="emailControl.hasError('email') && emailControl.touched">
+            <span class="error">Invalid email</span>
+          </ng-container>
+        </div>
+        <input type="email" formControlName="email" placeholder="e.g. stephenking@lorem.com">
+      </label>
+      <label>
+        <div>
+          <span>Phone Number</span>
+          <ng-container *ngIf="isRequired(credentialControls.controls.phone)">
+            <ng-container *ngTemplateOutlet="required" />
+          </ng-container>
+        </div>
+        <input type="tel" formControlName="phone" placeholder="e.g. +1 234 567 890">
+      </label>
+      <button class="button-next" cdkStepperNext>Next Step</button>
+    </form>
+  </cdk-step>
+  <!-- STEP 2 ********************************************************************************** -->
+  <cdk-step label="Select Plan" [stepControl]="planControls">
+    <hgroup>
+      <h1>Select your plan</h1>
+      <p>You have the option of monthly or yearly billing.</p>
+    </hgroup>
+    <form [formGroup]="planControls">
+      <label *ngFor="let plan of plans">
+        <input type="radio" [value]="plan" formControlName="plan">
+        <ng-container [ngComponentOutlet]="plan.icon" />
+        <div>
+          <span>{{ plan.name }}</span>
+          <span>{{ plan.price | price:isMonthlyBilling }}</span>
+          <span *ngIf="!isMonthlyBilling">2 months free</span>
+        </div>
+      </label>
+      <div>
+        <button type="button" (click)="setBillingCycle(true)">Monthly</button>
+        <input type="checkbox" formControlName="billingCycle">
+        <button type="button" (click)="setBillingCycle(false)">Yearly</button>
+      </div>
+      <div>
+        <button class="button-previous" type="button" cdkStepperPrevious>Go Back</button>
+        <button class="button-next" cdkStepperNext>Next Step</button>
+      </div>
+    </form>
+  </cdk-step>
+  <!-- STEP 3 ********************************************************************************** -->
+  <cdk-step label="Add-Ons" optional>
+    <hgroup>
+      <h1>Pick add-ons</h1>
+      <p>Add-ons help enhance your gaming experience.</p>
+    </hgroup>
+    <form>
+      <label *ngFor="let addOn of addOns">
+        <input type="checkbox" [checked]="addOn.selected" (change)="toggleAddOn(addOn)">
+        <div>
+          <span>{{ addOn.name }}</span>
+          <span>{{ addOn.description }}</span>
+        </div>
+        <span>{{ addOn.price | price:isMonthlyBilling:PLUS }}</span>
+      </label>
+      <div>
+        <button class="button-previous" type="button" cdkStepperPrevious>Go Back</button>
+        <button class="button-next" cdkStepperNext>Next Step</button>
+      </div>
+    </form>
+  </cdk-step>
+  <!-- STEP 4 ********************************************************************************** -->
+  <cdk-step label="Summary">
+    <hgroup>
+      <h1>Finishing up</h1>
+      <p>Double-check everything looks OK before confirming.</p>
+    </hgroup>
+    <div *ngIf="planControls.controls.plan.value as plan">
+      <div>
+        <span>{{ plan.name }} ({{ isMonthlyBilling ? 'Monthly' : 'Yearly' }})</span>
+        <button type="button" (click)="stepper.selectedIndex = 1">Change</button>
+      </div>
+      <span>{{ plan.price | price:isMonthlyBilling }}</span>
+    </div>
+    <ng-container *ngIf="selectedAddOns.length">
+      <hr>
+      <div *ngFor="let addOn of selectedAddOns">
+        <span>{{ addOn.name }}</span>
+        <span>{{ addOn.price | price:isMonthlyBilling:PLUS }}</span>
+      </div>
+    </ng-container>
+    <div class="total">
+      <span>Total (per {{ isMonthlyBilling ? 'month' : 'year' }})</span>
+      <span>{{ totalPrice | price:isMonthlyBilling }}</span>
+    </div>
+    <div>
+      <button class="button-previous" type="button" cdkStepperPrevious>Go Back</button>
+      <button class="button-confirm" type="button" cdkStepperNext>Confirm</button>
+    </div>
+  </cdk-step>
+  <!-- STEP 5 ********************************************************************************** -->
+  <cdk-step>
+    <h1>Thank you!</h1>
+    <p>
+      Thanks for confirming your subscription! We hope you have fun using our platform. If you ever
+      need support, please feel free to email us at support&#64;loremgaming.com.
+    </p>
+  </cdk-step>
+</app-stepper>
+
+<ng-template #required>
+  <span class="error">This field is required</span>
+</ng-template>

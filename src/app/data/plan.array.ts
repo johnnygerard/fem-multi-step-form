@@ -1,21 +1,10 @@
-import { Plan } from "../types/plan.type";
+import { AdvancedSvgComponent } from "../svg/advanced-svg.component";
+import { ArcadeSvgComponent } from "../svg/arcade-svg.component";
+import { ProSvgComponent } from "../svg/pro-svg.component";
+import { Plan } from "../types/plan.class";
 
 export const plans: Plan[] = [
-  {
-    name: 'Arcade',
-    monthlyPrice: 9,
-  },
-  {
-    name: 'Advanced',
-    monthlyPrice: 12,
-  },
-  {
-    name: 'Pro',
-    monthlyPrice: 15,
-  },
-].map(({ name, monthlyPrice }) => ({
-  icon: name.toLowerCase() + '.svg',
-  name,
-  monthlyPrice,
-  yearlyPrice: monthlyPrice * 10, // 2 months free
-}));
+  new Plan('Arcade', ArcadeSvgComponent, 9),
+  new Plan('Advanced', AdvancedSvgComponent, 12),
+  new Plan('Pro', ProSvgComponent, 15),
+];

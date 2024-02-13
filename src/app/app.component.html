@@ -32,13 +32,13 @@
         <ng-container [ngComponentOutlet]="plan.icon" />
         <div>
           <span>{{ plan.name }}</span>
-          <span>{{ plan.price | price:billingCycleIsMonthly }}</span>
-          <span *ngIf="!billingCycleIsMonthly">2 months free</span>
+          <span>{{ plan.price | price:isMonthlyBilling }}</span>
+          <span *ngIf="!isMonthlyBilling">2 months free</span>
         </div>
       </label>
       <div>
         <button type="button" (click)="setBillingCycle(true)">Monthly</button>
-        <input type="checkbox" formControlName="billingCycleIsMonthly">
+        <input type="checkbox" formControlName="billingCycle">
         <button type="button" (click)="setBillingCycle(false)">Yearly</button>
       </div>
     </form>
@@ -56,7 +56,7 @@
           <span>{{ addOn.name }}</span>
           <span>{{ addOn.description }}</span>
         </div>
-        <span>{{ addOn.price | price:billingCycleIsMonthly:PLUS }}</span>
+        <span>{{ addOn.price | price:isMonthlyBilling:PLUS }}</span>
       </label>
     </form>
   </cdk-step>
@@ -68,21 +68,21 @@
     </hgroup>
     <div *ngIf="planControls.controls.plan.value as plan">
       <div>
-        <span>{{ plan.name }} ({{ billingCycleIsMonthly ? 'Monthly' : 'Yearly' }})</span>
+        <span>{{ plan.name }} ({{ isMonthlyBilling ? 'Monthly' : 'Yearly' }})</span>
         <button type="button" (click)="stepper.selectedIndex = 1">Change</button>
       </div>
-      <span>{{ plan.price | price:billingCycleIsMonthly }}</span>
+      <span>{{ plan.price | price:isMonthlyBilling }}</span>
     </div>
     <ng-container *ngIf="selectedAddOns.length">
       <hr>
       <div *ngFor="let addOn of selectedAddOns">
         <span>{{ addOn.name }}</span>
-        <span>{{ addOn.price | price:billingCycleIsMonthly:PLUS }}</span>
+        <span>{{ addOn.price | price:isMonthlyBilling:PLUS }}</span>
       </div>
     </ng-container>
     <div class="total">
-      <span>Total (per {{ billingCycleIsMonthly ? 'month' : 'year' }})</span>
-      <span>{{ totalPrice | price:billingCycleIsMonthly }}</span>
+      <span>Total (per {{ isMonthlyBilling ? 'month' : 'year' }})</span>
+      <span>{{ totalPrice | price:isMonthlyBilling }}</span>
     </div>
   </cdk-step>
 </app-stepper>

@@ -26,7 +26,7 @@ import { Price } from './types/price.type';
 })
 export class AppComponent {
   readonly PLUS = '+';
-  billingCycleIsMonthly = true;
+  isMonthlyBilling = true;
   addOns: AddOn[] = addOns;
   selectedAddOns: AddOn[] = [];
   plans: Plan[] = plans;
@@ -46,27 +46,20 @@ export class AppComponent {
 
   planControls = this._formBuilder.group({
     plan: [null as Plan | null, Validators.required],
-    billingCycleIsMonthly: this.billingCycleIsMonthly,
+    billingCycle: this.isMonthlyBilling,
   });
 
   constructor(private _formBuilder: FormBuilder) {
-    // Update billing cycle on change
-    this.#billingCycleControl.valueChanges.subscribe(
-      (value: boolean | null) => {
-        if (value !== null) this.billingCycleIsMonthly = value;
-      }
+
+    this.#billingControl.valueChanges.subscribe(
+      _ => this.isMonthlyBilling = !this.isMonthlyBilling
     );
 
-    // Update total price on plan selection
-    this.#planControl.valueChanges.subscribe(
-      (plan: Plan | null) => {
-        if (plan) this.totalPrice = this.#computeTotalPrice();
-      }
-    );
+    this.#planControl.valueChanges.subscribe(_ => this.#recomputeTotalPrice());
   }
 
-  get #billingCycleControl(): FormControl<boolean | null> {
-    return this.planControls.controls.billingCycleIsMonthly;
+  get #billingControl(): FormControl<boolean | null> {
+    return this.planControls.controls.billingCycle;
   }
 
   get #planControl(): FormControl<Plan | null> {
@@ -76,27 +69,25 @@ export class AppComponent {
   toggleAddOn(addOn: AddOn): void {
     addOn.selected = !addOn.selected;
 
-    // Recompute selected add-ons while preserving the order
+    // Recompute selected add-ons and total price
     this.selectedAddOns = this.addOns.filter(addOn => addOn.selected);
-
-    // Recompute the total price
-    this.totalPrice = this.#computeTotalPrice();
+    this.#recomputeTotalPrice();
   }
 
-  #computeTotalPrice(): Price {
+  #recomputeTotalPrice(): void {
     const plan = this.#planControl.value as Plan;
     const monthlyTotalPrice = this.selectedAddOns.reduce(
       (sum, selectedAddOn) => sum + selectedAddOn.price.monthly,
       plan.price.monthly
     );
 
-    return {
+    this.totalPrice = {
       monthly: monthlyTotalPrice,
       yearly: monthlyTotalPrice * 10, // 2 months free
     };
   }
 
   setBillingCycle(isMonthly: boolean): void {
-    this.#billingCycleControl.setValue(isMonthly);
+    this.#billingControl.setValue(isMonthly);
   }
 }

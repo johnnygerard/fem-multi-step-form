@@ -37,10 +37,10 @@ export class AppComponent {
 
   credentialControls = this._formBuilder.group({
     name: ['', Validators.required],
-    email: ['', Validators.compose([
+    email: ['', [
       Validators.required,
       Validators.email,
-    ])],
+    ]],
     phone: ['', Validators.required],
   });
 

@@ -1,6 +1,6 @@
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { CommonModule, TitleCasePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { addOns } from './data/add-on.array';
 import { plans } from './data/plan.array';
@@ -13,6 +13,7 @@ import { Price } from './types/price.type';
 @Component({
   selector: 'app-root',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
     CdkStepperModule,

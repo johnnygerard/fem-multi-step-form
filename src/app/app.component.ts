@@ -1,13 +1,13 @@
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { CommonModule, TitleCasePipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { addOns } from './data/add-on.array';
 import { plans } from './data/plan.array';
+import { PricePipe } from './price.pipe';
 import { StepperComponent } from './stepper/stepper.component';
 import { AddOn } from './types/add-on.class';
 import { Plan } from './types/plan.class';
-import { PricePipe } from './price.pipe';
 import { Price } from './types/price.type';
 
 @Component({
@@ -51,18 +51,26 @@ export class AppComponent {
 
   constructor(private _formBuilder: FormBuilder) {
     // Update billing cycle on change
-    this.planControls.controls.billingCycleIsMonthly.valueChanges.subscribe(
+    this.#billingCycleControl.valueChanges.subscribe(
       (value: boolean | null) => {
         if (value !== null) this.billingCycleIsMonthly = value;
       }
     );
 
     // Update total price on plan selection
-    this.planControls.controls.plan.valueChanges.subscribe(
+    this.#planControl.valueChanges.subscribe(
       (plan: Plan | null) => {
         if (plan) this.totalPrice = this.#computeTotalPrice();
       }
     );
+  }
+
+  get #billingCycleControl(): FormControl<boolean | null> {
+    return this.planControls.controls.billingCycleIsMonthly;
+  }
+
+  get #planControl(): FormControl<Plan | null> {
+    return this.planControls.controls.plan;
   }
 
   toggleAddOn(addOn: AddOn): void {
@@ -76,7 +84,7 @@ export class AppComponent {
   }
 
   #computeTotalPrice(): Price {
-    const plan = this.planControls.controls.plan.value as Plan;
+    const plan = this.#planControl.value as Plan;
     const monthlyTotalPrice = this.selectedAddOns.reduce(
       (sum, selectedAddOn) => sum + selectedAddOn.price.monthly,
       plan.price.monthly
@@ -89,6 +97,6 @@ export class AppComponent {
   }
 
   setBillingCycle(isMonthly: boolean): void {
-    this.planControls.controls.billingCycleIsMonthly.setValue(isMonthly);
+    this.#billingCycleControl.setValue(isMonthly);
   }
 }

@@ -1,3 +1,8 @@
 @use 'reset';
 @use 'fonts';
 @use 'index' as *;
+
+body {
+  font-family: "Ubuntu", sans-serif;
+  background-color: $background-color;
+}

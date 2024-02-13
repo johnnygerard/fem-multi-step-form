@@ -27,6 +27,7 @@ import { Price } from './types/price.type';
 })
 export class AppComponent {
   readonly PLUS = '+';
+  subscribed = false;
   isMonthlyBilling = true;
   addOns: AddOn[] = addOns;
   selectedAddOns: AddOn[] = [];

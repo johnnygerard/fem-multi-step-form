@@ -1,12 +1,17 @@
 <ol class="steps">
-  <ng-container *ngFor="let step of steps; index as i">
-    <li class="step" [class.active]="i === selectedIndex" *ngIf="step !== steps.last">
-      <div class="step-number">{{ i + 1 }}</div>
-      <div class="step-labels">
-        <span class="step-label-numeric">Step {{ i + 1 }}</span>
-        <span class="step-label">{{ step.label }}</span>
-      </div>
-    </li>
-  </ng-container>
+  <li class="step" [class.active]="i === selectedIndex" *ngFor="let step of steps; index as i">
+    <div class="step-number">{{ i + 1 }}</div>
+    <div class="step-labels">
+      <span class="step-label-numeric">Step {{ i + 1 }}</span>
+      <span class="step-label">{{ step.label }}</span>
+    </div>
+  </li>
 </ol>
-<ng-container *ngTemplateOutlet="selected?.content ?? null" />
+
+<ng-container *ngIf="subscribed; else selected!.content">
+  <h1>Thank you!</h1>
+  <p>
+    Thanks for confirming your subscription! We hope you have fun using our platform. If you ever
+    need support, please feel free to email us at support&#64;loremgaming.com.
+  </p>
+</ng-container>

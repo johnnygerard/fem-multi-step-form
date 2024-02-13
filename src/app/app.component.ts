@@ -1,7 +1,7 @@
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { CommonModule, TitleCasePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroupDirective, ReactiveFormsModule, Validators } from '@angular/forms';
 import { addOns } from './data/add-on.array';
 import { plans } from './data/plan.array';
 import { PricePipe } from './price.pipe';
@@ -36,6 +36,8 @@ export class AppComponent {
     yearly: 0,
   };
 
+  @ViewChild('credentialForm') credentialForm?: FormGroupDirective;
+
   credentialControls = this._formBuilder.group({
     name: ['', Validators.required],
     email: ['', [
@@ -62,7 +64,9 @@ export class AppComponent {
   }
 
   isRequired(control: FormControl): boolean {
-    return control.hasError('required') && control.touched;
+    const formSubmitted = this.credentialForm?.submitted ?? false;
+
+    return control.hasError('required') && (control.touched || formSubmitted);
   }
 
   get #billingControl(): FormControl<boolean | null> {

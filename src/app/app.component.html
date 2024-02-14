@@ -1,4 +1,4 @@
-<app-stepper [linear]="true" [subscribed]="subscribed" #stepper>
+<app-stepper [linear]="true" #stepper>
   <!-- STEP 1 ********************************************************************************** -->
   <cdk-step label="Your Info" [stepControl]="credentialControls">
     <ng-container *ngTemplateOutlet="headingGroup; context: headings[0]" />
@@ -35,7 +35,9 @@
         <input class="credential-input" type="tel" formControlName="phone"
             placeholder="e.g. +1 234 567 890">
       </label>
-      <ng-container *ngTemplateOutlet="buttonsFirstStep" />
+      <div class="lone button-container">
+        <app-next-button />
+      </div>
     </form>
   </cdk-step>
   <!-- STEP 2 ********************************************************************************** -->
@@ -56,7 +58,10 @@
         <input type="checkbox" formControlName="billingCycle">
         <button type="button" (click)="setBillingCycle(false)">Yearly</button>
       </div>
-      <ng-container *ngTemplateOutlet="buttons" />
+      <div class="button-container">
+        <app-back-button />
+        <app-next-button />
+      </div>
     </form>
   </cdk-step>
   <!-- STEP 3 ********************************************************************************** -->
@@ -71,7 +76,10 @@
         </div>
         <span>{{ addOn.price | price:isMonthlyBilling:PLUS }}</span>
       </label>
-      <ng-container *ngTemplateOutlet="buttons" />
+      <div class="button-container">
+        <app-back-button />
+        <app-next-button />
+      </div>
     </form>
   </cdk-step>
   <!-- STEP 4 ********************************************************************************** -->
@@ -95,38 +103,13 @@
       <span>Total (per {{ isMonthlyBilling ? 'month' : 'year' }})</span>
       <span>{{ totalPrice | price:isMonthlyBilling }}</span>
     </div>
-    <ng-container *ngTemplateOutlet="buttonsLastStep" />
+    <div class="button-container">
+      <app-back-button />
+      <app-confirm-button />
+    </div>
   </cdk-step>
 
   <!-- TEMPLATES ******************************************************************************* -->
-  <ng-template #buttons>
-    <div class="button-container">
-      <ng-container *ngTemplateOutlet="buttonPrevious" />
-      <ng-container *ngTemplateOutlet="buttonNext" />
-    </div>
-  </ng-template>
-
-  <ng-template #buttonsFirstStep>
-    <div class="lone button-container">
-      <ng-container *ngTemplateOutlet="buttonNext" />
-    </div>
-  </ng-template>
-
-  <ng-template #buttonsLastStep>
-    <div class="button-container">
-      <ng-container *ngTemplateOutlet="buttonPrevious" />
-      <button class="button-confirm" type="button" (click)="subscribed = true">Confirm</button>
-    </div>
-  </ng-template>
-
-  <ng-template #buttonPrevious>
-    <button class="button-previous" type="button" cdkStepperPrevious>Go Back</button>
-  </ng-template>
-
-  <ng-template #buttonNext>
-    <button class="button-next" cdkStepperNext>Next Step</button>
-  </ng-template>
-
   <ng-template #required>
     <span class="error">This field is required</span>
   </ng-template>

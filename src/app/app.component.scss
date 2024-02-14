@@ -102,68 +102,6 @@
   }
 }
 
-.button-previous,
-.button-next,
-.button-confirm {
-  // Typography
-  font-size: 14px;
-  font-weight: 500;
-
-  @include desktop {
-    // Typography
-    font-size: 16px;
-  }
-}
-
-.button-next,
-.button-confirm {
-  color: map.get($palette, 'white');
-
-  // Center text
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 96px;
-  height: 40px;
-  border-radius: 4px;
-
-  @include desktop {
-    width: 124px;
-    height: 48px;
-    border-radius: 8px;
-  }
-}
-
-.button-confirm {
-  background-color: map.get($palette, 'purple');
-
-  &:is(:hover, :focus-visible) {
-    background-color: map.get($palette, 'button-confirm-interactive');
-  }
-}
-
-.button-previous {
-  color: map.get($palette, 'gray');
-
-  &:is(:hover, :focus-visible) {
-    color: map.get($palette, 'denim');
-  }
-}
-
-.button-next {
-  background-color: map.get($palette, 'denim');
-
-  &:is(:hover, :focus-visible) {
-    background-color: map.get($palette, 'button-next-interactive');
-  }
-
-  &:focus-visible {
-    outline: 2px solid map.get($palette, 'white');
-    outline-offset: -4px;
-  }
-}
-
 .label {
   display: flex;
   justify-content: space-between;

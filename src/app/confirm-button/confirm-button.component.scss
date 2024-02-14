@@ -1,0 +1,14 @@
+@use 'sass:map';
+@use 'index' as *;
+
+:host {
+  display: block;
+}
+
+button {
+  background-color: map.get($palette, 'purple');
+
+  &:is(:hover, :focus-visible) {
+    background-color: map.get($palette, 'button-confirm-interactive');
+  }
+}

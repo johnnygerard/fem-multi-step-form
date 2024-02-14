@@ -1,0 +1,14 @@
+@use 'sass:map';
+@use 'index' as *;
+
+:host {
+  display: block;
+}
+
+button {
+  color: map.get($palette, 'gray');
+
+  &:is(:hover, :focus-visible) {
+    color: map.get($palette, 'denim');
+  }
+}

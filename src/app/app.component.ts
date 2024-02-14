@@ -10,6 +10,9 @@ import { AddOn } from './types/add-on.class';
 import { Plan } from './types/plan.class';
 import { Price } from './types/price.type';
 import { headings } from './data/heading.array';
+import { NextButtonComponent } from './next-button/next-button.component';
+import { BackButtonComponent } from './back-button/back-button.component';
+import { ConfirmButtonComponent } from './confirm-button/confirm-button.component';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +23,9 @@ import { headings } from './data/heading.array';
     CdkStepperModule,
     ReactiveFormsModule,
     StepperComponent,
+    BackButtonComponent,
+    NextButtonComponent,
+    ConfirmButtonComponent,
     PricePipe,
     TitleCasePipe,
   ],
@@ -29,7 +35,6 @@ import { headings } from './data/heading.array';
 export class AppComponent {
   readonly PLUS = '+';
   readonly headings = headings;
-  subscribed = false;
   isMonthlyBilling = true;
   addOns: AddOn[] = addOns;
   selectedAddOns: AddOn[] = [];

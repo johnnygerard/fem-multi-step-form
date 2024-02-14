@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CdkStepper, CdkStepperModule } from '@angular/cdk/stepper';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { SubscriptionService } from '../subscription.service';
 
 @Component({
   selector: 'app-stepper',
@@ -8,6 +9,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     CdkStepperModule,
+    AsyncPipe,
   ],
   providers: [
     { provide: CdkStepper, useExisting: StepperComponent }
@@ -17,5 +19,5 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StepperComponent extends CdkStepper {
-  @Input({ required: true }) subscribed!: boolean;
+  isSubscribed$ = inject(SubscriptionService).isSubscribed$;
 }

@@ -9,7 +9,7 @@
 </ol>
 
 <div class="step-content">
-  <ng-container *ngIf="subscribed; else selected!.content">
+  <ng-container *ngIf="isSubscribed$ | async; else selected!.content">
     <h1 class="typo-heading">Thank you!</h1>
     <p class="typo-body-l">
       Thanks for confirming your subscription! We hope you have fun using our platform. If you ever

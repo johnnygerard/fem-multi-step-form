@@ -41,6 +41,10 @@ h6 {
 
 /* End of Josh's Custom CSS Reset */
 
+html {
+  min-height: 100%;
+}
+
 code,
 kbd,
 pre,

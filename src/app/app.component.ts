@@ -9,6 +9,7 @@ import { StepperComponent } from './stepper/stepper.component';
 import { AddOn } from './types/add-on.class';
 import { Plan } from './types/plan.class';
 import { Price } from './types/price.type';
+import { headings } from './data/heading.array';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +28,7 @@ import { Price } from './types/price.type';
 })
 export class AppComponent {
   readonly PLUS = '+';
+  readonly headings = headings;
   subscribed = false;
   isMonthlyBilling = true;
   addOns: AddOn[] = addOns;
@@ -48,8 +50,6 @@ export class AppComponent {
     phone: ['', Validators.required],
   });
 
-  emailControl = this.credentialControls.controls.email;
-
   planControls = this._formBuilder.group({
     plan: [null as Plan | null, Validators.required],
     billingCycle: this.isMonthlyBilling,
@@ -65,9 +65,17 @@ export class AppComponent {
   }
 
   isRequired(control: FormControl): boolean {
+    return this.#isErrorDisplayed('required', control);
+  }
+
+  isEmailInvalid(control: FormControl): boolean {
+    return this.#isErrorDisplayed('email', control);
+  }
+
+  #isErrorDisplayed(errorName: string, control: FormControl): boolean {
     const formSubmitted = this.credentialForm?.submitted ?? false;
 
-    return control.hasError('required') && (control.touched || formSubmitted);
+    return control.hasError(errorName) && (control.touched || formSubmitted);
   }
 
   get #billingControl(): FormControl<boolean | null> {

@@ -1,3 +1,104 @@
+@use 'sass:map';
+@use 'index' as *;
+
 :host {
-  display: block;
+  display: flex;
+  height: 100%;
+
+  @include desktop {
+    gap: 100px;
+  }
+}
+
+.steps {
+  display: flex;
+
+  @include mobile {
+    position: absolute;
+    justify-content: center;
+    gap: 16px;
+    height: 172px;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    background: $svg-background-mobile center / cover;
+  }
+
+  @include desktop {
+    flex-direction: column;
+    gap: 32px;
+    width: 274px;
+    height: 100%;
+    padding: 40px 32px;
+    background-image: $svg-background-desktop;
+  }
+}
+
+.step {
+  @include mobile {
+    margin-top: 32px;
+  }
+
+  @include desktop {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+.step-number {
+  $size: 34px;
+
+  border: 1px solid map.get($palette, 'white');
+  border-radius: 50%;
+  width: $size;
+  height: $size;
+
+  // Typography
+  color: map.get($palette, 'white');
+  font-size: 14px;
+  font-weight: 700;
+
+  // Center number
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-labels {
+  display: none;
+
+  @include desktop {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+.step-label-numeric {
+  // Typography
+  color: map.get($palette, 'light-blue');
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.step-label {
+  // Typography
+  color: map.get($palette, 'white');
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.step-content {
+  display: flex;
+  flex-direction: column;
+
+  @include desktop {
+    width: 450px;
+    padding-top: 40px;
+    position: relative; // For the button container
+  }
 }

@@ -1,8 +1,53 @@
+@use 'sass:map';
 @use 'reset';
 @use 'fonts';
 @use 'index' as *;
 
+html {
+  position: relative;
+  min-width: 300px;
+}
+
 body {
   font-family: "Ubuntu", sans-serif;
-  background-color: $background-color;
+  background-color: map.get($palette, 'background');
+
+  // Center content horizontally
+  display: flex;
+  justify-content: center;
+
+  @include mobile {
+    padding: 0 16px;
+  }
+
+  @include desktop {
+    // Center content vertically
+    min-height: 100vh;
+    align-items: center;
+  }
+}
+
+.typo-heading {
+  color: map.get($palette, 'denim');
+  font-weight: 700;
+  font-size: 24px;
+
+  @include desktop {
+    font-size: 32px;
+  }
+}
+
+.typo-body-l {
+  color: map.get($palette, 'gray');
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.typo-body-m {
+  color: map.get($palette, 'denim');
+  font-size: 12px;
+
+  @include desktop {
+    font-size: 14px;
+  }
 }

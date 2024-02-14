@@ -1,51 +1,47 @@
 <app-stepper [linear]="true" [subscribed]="subscribed" #stepper>
   <!-- STEP 1 ********************************************************************************** -->
   <cdk-step label="Your Info" [stepControl]="credentialControls">
-    <hgroup>
-      <h1>Personal info</h1>
-      <p>Please provide your name, email address, and phone number.</p>
-    </hgroup>
-    <form [formGroup]="credentialControls" #credentialForm="ngForm">
+    <ng-container *ngTemplateOutlet="headingGroup; context: headings[0]" />
+    <form class="credential-form" [formGroup]="credentialControls" #credentialForm="ngForm">
       <label>
-        <div>
+        <div class="label typo-body-m">
           <span>Name</span>
           <ng-container *ngIf="isRequired(credentialControls.controls.name)">
             <ng-container *ngTemplateOutlet="required" />
           </ng-container>
         </div>
-        <input formControlName="name" placeholder="e.g. Stephen King">
+        <input class="credential-input" formControlName="name" placeholder="e.g. Stephen King">
       </label>
       <label>
-        <div>
+        <div class="label typo-body-m">
           <span>Email Address</span>
-          <ng-container *ngIf="isRequired(emailControl)">
+          <ng-container *ngIf="isRequired(credentialControls.controls.email)">
             <ng-container *ngTemplateOutlet="required" />
           </ng-container>
-          <ng-container *ngIf="emailControl.hasError('email') && emailControl.touched">
+          <ng-container *ngIf="isEmailInvalid(credentialControls.controls.email)">
             <span class="error">Invalid email</span>
           </ng-container>
         </div>
-        <input type="email" formControlName="email" placeholder="e.g. stephenking@lorem.com">
+        <input class="credential-input" type="email" formControlName="email"
+            placeholder="e.g. stephenking@lorem.com">
       </label>
       <label>
-        <div>
+        <div class="label typo-body-m">
           <span>Phone Number</span>
           <ng-container *ngIf="isRequired(credentialControls.controls.phone)">
             <ng-container *ngTemplateOutlet="required" />
           </ng-container>
         </div>
-        <input type="tel" formControlName="phone" placeholder="e.g. +1 234 567 890">
+        <input class="credential-input" type="tel" formControlName="phone"
+            placeholder="e.g. +1 234 567 890">
       </label>
-      <button class="button-next" cdkStepperNext>Next Step</button>
+      <ng-container *ngTemplateOutlet="buttonsFirstStep" />
     </form>
   </cdk-step>
   <!-- STEP 2 ********************************************************************************** -->
   <cdk-step label="Select Plan" [stepControl]="planControls">
-    <hgroup>
-      <h1>Select your plan</h1>
-      <p>You have the option of monthly or yearly billing.</p>
-    </hgroup>
-    <form [formGroup]="planControls">
+    <ng-container *ngTemplateOutlet="headingGroup; context: headings[1]" />
+    <form class="form" [formGroup]="planControls">
       <label *ngFor="let plan of plans">
         <input type="radio" [value]="plan" formControlName="plan">
         <ng-container [ngComponentOutlet]="plan.icon" />
@@ -60,19 +56,13 @@
         <input type="checkbox" formControlName="billingCycle">
         <button type="button" (click)="setBillingCycle(false)">Yearly</button>
       </div>
-      <div>
-        <button class="button-previous" type="button" cdkStepperPrevious>Go Back</button>
-        <button class="button-next" cdkStepperNext>Next Step</button>
-      </div>
+      <ng-container *ngTemplateOutlet="buttons" />
     </form>
   </cdk-step>
   <!-- STEP 3 ********************************************************************************** -->
   <cdk-step label="Add-Ons" optional>
-    <hgroup>
-      <h1>Pick add-ons</h1>
-      <p>Add-ons help enhance your gaming experience.</p>
-    </hgroup>
-    <form>
+    <ng-container *ngTemplateOutlet="headingGroup; context: headings[2]" />
+    <form class="form">
       <label *ngFor="let addOn of addOns">
         <input type="checkbox" [checked]="addOn.selected" (change)="toggleAddOn(addOn)">
         <div>
@@ -81,18 +71,12 @@
         </div>
         <span>{{ addOn.price | price:isMonthlyBilling:PLUS }}</span>
       </label>
-      <div>
-        <button class="button-previous" type="button" cdkStepperPrevious>Go Back</button>
-        <button class="button-next" cdkStepperNext>Next Step</button>
-      </div>
+      <ng-container *ngTemplateOutlet="buttons" />
     </form>
   </cdk-step>
   <!-- STEP 4 ********************************************************************************** -->
   <cdk-step label="Summary">
-    <hgroup>
-      <h1>Finishing up</h1>
-      <p>Double-check everything looks OK before confirming.</p>
-    </hgroup>
+    <ng-container *ngTemplateOutlet="headingGroup; context: headings[3]" />
     <div *ngIf="planControls.controls.plan.value as plan">
       <div>
         <span>{{ plan.name }} ({{ isMonthlyBilling ? 'Monthly' : 'Yearly' }})</span>
@@ -111,13 +95,47 @@
       <span>Total (per {{ isMonthlyBilling ? 'month' : 'year' }})</span>
       <span>{{ totalPrice | price:isMonthlyBilling }}</span>
     </div>
-    <div>
-      <button class="button-previous" type="button" cdkStepperPrevious>Go Back</button>
+    <ng-container *ngTemplateOutlet="buttonsLastStep" />
+  </cdk-step>
+
+  <!-- TEMPLATES ******************************************************************************* -->
+  <ng-template #buttons>
+    <div class="button-container">
+      <ng-container *ngTemplateOutlet="buttonPrevious" />
+      <ng-container *ngTemplateOutlet="buttonNext" />
+    </div>
+  </ng-template>
+
+  <ng-template #buttonsFirstStep>
+    <div class="lone button-container">
+      <ng-container *ngTemplateOutlet="buttonNext" />
+    </div>
+  </ng-template>
+
+  <ng-template #buttonsLastStep>
+    <div class="button-container">
+      <ng-container *ngTemplateOutlet="buttonPrevious" />
       <button class="button-confirm" type="button" (click)="subscribed = true">Confirm</button>
     </div>
-  </cdk-step>
-</app-stepper>
+  </ng-template>
 
-<ng-template #required>
-  <span class="error">This field is required</span>
-</ng-template>
+  <ng-template #buttonPrevious>
+    <button class="button-previous" type="button" cdkStepperPrevious>Go Back</button>
+  </ng-template>
+
+  <ng-template #buttonNext>
+    <button class="button-next" cdkStepperNext>Next Step</button>
+  </ng-template>
+
+  <ng-template #required>
+    <span class="error">This field is required</span>
+  </ng-template>
+
+  <ng-template #headingGroup let-heading="heading" let-subheading="subheading">
+    <hgroup class="headings">
+      <h1 class="typo-heading">{{ heading }}</h1>
+      <p class="typo-body-l">{{ subheading }}</p>
+    </hgroup>
+  </ng-template>
+  <!-- TEMPLATES ******************************************************************************* -->
+</app-stepper>

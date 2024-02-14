@@ -8,10 +8,12 @@
   </li>
 </ol>
 
-<ng-container *ngIf="subscribed; else selected!.content">
-  <h1>Thank you!</h1>
-  <p>
-    Thanks for confirming your subscription! We hope you have fun using our platform. If you ever
-    need support, please feel free to email us at support&#64;loremgaming.com.
-  </p>
-</ng-container>
+<div class="step-content">
+  <ng-container *ngIf="subscribed; else selected!.content">
+    <h1 class="typo-heading">Thank you!</h1>
+    <p class="typo-body-l">
+      Thanks for confirming your subscription! We hope you have fun using our platform. If you ever
+      need support, please feel free to email us at support&#64;loremgaming.com.
+    </p>
+  </ng-container>
+</div>

@@ -13,6 +13,7 @@ import { headings } from './data/heading.array';
 import { NextButtonComponent } from './next-button/next-button.component';
 import { BackButtonComponent } from './back-button/back-button.component';
 import { ConfirmButtonComponent } from './confirm-button/confirm-button.component';
+import { HeadingComponent } from './heading/heading.component';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,7 @@ import { ConfirmButtonComponent } from './confirm-button/confirm-button.componen
     BackButtonComponent,
     NextButtonComponent,
     ConfirmButtonComponent,
+    HeadingComponent,
     PricePipe,
     TitleCasePipe,
   ],

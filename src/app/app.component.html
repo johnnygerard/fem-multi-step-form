@@ -1,7 +1,7 @@
 <app-stepper [linear]="true" #stepper>
   <!-- STEP 1 ********************************************************************************** -->
   <cdk-step label="Your Info" [stepControl]="credentialControls">
-    <ng-container *ngTemplateOutlet="headingGroup; context: headings[0]" />
+    <app-heading [heading]="headings[0].heading" [subheading]="headings[0].subheading" />
     <form class="credential-form" [formGroup]="credentialControls" #credentialForm="ngForm">
       <label>
         <div class="label typo-body-m">
@@ -38,11 +38,14 @@
       <div class="lone button-container">
         <app-next-button />
       </div>
+      <ng-template #required>
+        <span class="error">This field is required</span>
+      </ng-template>
     </form>
   </cdk-step>
   <!-- STEP 2 ********************************************************************************** -->
   <cdk-step label="Select Plan" [stepControl]="planControls">
-    <ng-container *ngTemplateOutlet="headingGroup; context: headings[1]" />
+    <app-heading [heading]="headings[1].heading" [subheading]="headings[1].subheading" />
     <form class="form" [formGroup]="planControls">
       <label *ngFor="let plan of plans">
         <input type="radio" [value]="plan" formControlName="plan">
@@ -66,7 +69,7 @@
   </cdk-step>
   <!-- STEP 3 ********************************************************************************** -->
   <cdk-step label="Add-Ons" optional>
-    <ng-container *ngTemplateOutlet="headingGroup; context: headings[2]" />
+    <app-heading [heading]="headings[2].heading" [subheading]="headings[2].subheading" />
     <form class="form">
       <label *ngFor="let addOn of addOns">
         <input type="checkbox" [checked]="addOn.selected" (change)="toggleAddOn(addOn)">
@@ -84,7 +87,7 @@
   </cdk-step>
   <!-- STEP 4 ********************************************************************************** -->
   <cdk-step label="Summary">
-    <ng-container *ngTemplateOutlet="headingGroup; context: headings[3]" />
+    <app-heading [heading]="headings[3].heading" [subheading]="headings[3].subheading" />
     <div *ngIf="planControls.controls.plan.value as plan">
       <div>
         <span>{{ plan.name }} ({{ isMonthlyBilling ? 'Monthly' : 'Yearly' }})</span>
@@ -108,17 +111,4 @@
       <app-confirm-button />
     </div>
   </cdk-step>
-
-  <!-- TEMPLATES ******************************************************************************* -->
-  <ng-template #required>
-    <span class="error">This field is required</span>
-  </ng-template>
-
-  <ng-template #headingGroup let-heading="heading" let-subheading="subheading">
-    <hgroup class="headings">
-      <h1 class="typo-heading">{{ heading }}</h1>
-      <p class="typo-body-l">{{ subheading }}</p>
-    </hgroup>
-  </ng-template>
-  <!-- TEMPLATES ******************************************************************************* -->
 </app-stepper>

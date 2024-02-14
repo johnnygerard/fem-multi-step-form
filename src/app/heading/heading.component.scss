@@ -1,0 +1,17 @@
+@use 'index' as *;
+
+:host {
+  display: block;
+}
+
+.headings {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 22px;
+
+  @include desktop {
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+}

@@ -2,7 +2,7 @@
 <form class="credential-form" [formGroup]="credentialControls" #credentialForm="ngForm">
   <!-- Name Label ****************************************************************************** -->
   <label>
-    <div class="label typo-body-m">
+    <div class="label g-typo-body-m">
       <span>Name</span>
       <ng-container *ngIf="isRequired(credentialControls.controls.name)">
         <ng-container *ngTemplateOutlet="required" />
@@ -12,7 +12,7 @@
   </label>
   <!-- Email Label ***************************************************************************** -->
   <label>
-    <div class="label typo-body-m">
+    <div class="label g-typo-body-m">
       <span>Email Address</span>
       <ng-container *ngIf="isRequired(credentialControls.controls.email)">
         <ng-container *ngTemplateOutlet="required" />
@@ -26,7 +26,7 @@
   </label>
   <!-- Phone Label ***************************************************************************** -->
   <label>
-    <div class="label typo-body-m">
+    <div class="label g-typo-body-m">
       <span>Phone Number</span>
       <ng-container *ngIf="isRequired(credentialControls.controls.phone)">
         <ng-container *ngTemplateOutlet="required" />

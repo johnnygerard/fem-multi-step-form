@@ -27,7 +27,7 @@ body {
   }
 }
 
-.typo-heading {
+.g-typo-heading {
   color: map.get($palette, 'denim');
   font-weight: 700;
   font-size: 24px;
@@ -37,13 +37,13 @@ body {
   }
 }
 
-.typo-body-l {
+.g-typo-body-l {
   color: map.get($palette, 'gray');
   font-size: 16px;
   line-height: 25px;
 }
 
-.typo-body-m {
+.g-typo-body-m {
   color: map.get($palette, 'denim');
   font-size: 12px;
 

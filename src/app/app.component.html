@@ -1,47 +1,7 @@
 <app-stepper [linear]="true" #stepper>
   <!-- STEP 1 ********************************************************************************** -->
-  <cdk-step label="Your Info" [stepControl]="credentialControls">
-    <app-heading [heading]="headings[0].heading" [subheading]="headings[0].subheading" />
-    <form class="credential-form" [formGroup]="credentialControls" #credentialForm="ngForm">
-      <label>
-        <div class="label typo-body-m">
-          <span>Name</span>
-          <ng-container *ngIf="isRequired(credentialControls.controls.name)">
-            <ng-container *ngTemplateOutlet="required" />
-          </ng-container>
-        </div>
-        <input class="credential-input" formControlName="name" placeholder="e.g. Stephen King">
-      </label>
-      <label>
-        <div class="label typo-body-m">
-          <span>Email Address</span>
-          <ng-container *ngIf="isRequired(credentialControls.controls.email)">
-            <ng-container *ngTemplateOutlet="required" />
-          </ng-container>
-          <ng-container *ngIf="isEmailInvalid(credentialControls.controls.email)">
-            <span class="error">Invalid email</span>
-          </ng-container>
-        </div>
-        <input class="credential-input" type="email" formControlName="email"
-            placeholder="e.g. stephenking@lorem.com">
-      </label>
-      <label>
-        <div class="label typo-body-m">
-          <span>Phone Number</span>
-          <ng-container *ngIf="isRequired(credentialControls.controls.phone)">
-            <ng-container *ngTemplateOutlet="required" />
-          </ng-container>
-        </div>
-        <input class="credential-input" type="tel" formControlName="phone"
-            placeholder="e.g. +1 234 567 890">
-      </label>
-      <div class="lone button-container">
-        <app-next-button />
-      </div>
-      <ng-template #required>
-        <span class="error">This field is required</span>
-      </ng-template>
-    </form>
+  <cdk-step label="Your Info" [stepControl]="personalInfo.credentialControls">
+    <app-personal-info #personalInfo />
   </cdk-step>
   <!-- STEP 2 ********************************************************************************** -->
   <cdk-step label="Select Plan" [stepControl]="planControls">

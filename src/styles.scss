@@ -82,3 +82,23 @@ body {
     border-radius: 8px;
   }
 }
+
+.g-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  @include mobile {
+    background-color: map.get($palette, 'white');
+    padding: 16px;
+  }
+
+  @include desktop {
+    bottom: 16px;
+  }
+}

@@ -1,7 +1,7 @@
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { CommonModule, TitleCasePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroupDirective, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { addOns } from './data/add-on.array';
 import { plans } from './data/plan.array';
 import { PricePipe } from './price.pipe';
@@ -14,6 +14,7 @@ import { NextButtonComponent } from './next-button/next-button.component';
 import { BackButtonComponent } from './back-button/back-button.component';
 import { ConfirmButtonComponent } from './confirm-button/confirm-button.component';
 import { HeadingComponent } from './heading/heading.component';
+import { PersonalInfoComponent } from './personal-info/personal-info.component';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +29,7 @@ import { HeadingComponent } from './heading/heading.component';
     NextButtonComponent,
     ConfirmButtonComponent,
     HeadingComponent,
+    PersonalInfoComponent,
     PricePipe,
     TitleCasePipe,
   ],
@@ -46,17 +48,6 @@ export class AppComponent {
     yearly: 0,
   };
 
-  @ViewChild('credentialForm') credentialForm?: FormGroupDirective;
-
-  credentialControls = this._formBuilder.group({
-    name: ['', Validators.required],
-    email: ['', [
-      Validators.required,
-      Validators.email,
-    ]],
-    phone: ['', Validators.required],
-  });
-
   planControls = this._formBuilder.group({
     plan: [null as Plan | null, Validators.required],
     billingCycle: this.isMonthlyBilling,
@@ -70,21 +61,6 @@ export class AppComponent {
 
     this.#planControl.valueChanges.subscribe(_ => this.#recomputeTotalPrice());
   }
-
-  isRequired(control: FormControl): boolean {
-    return this.#isErrorDisplayed('required', control);
-  }
-
-  isEmailInvalid(control: FormControl): boolean {
-    return this.#isErrorDisplayed('email', control);
-  }
-
-  #isErrorDisplayed(errorName: string, control: FormControl): boolean {
-    const formSubmitted = this.credentialForm?.submitted ?? false;
-
-    return control.hasError(errorName) && (control.touched || formSubmitted);
-  }
-
   get #billingControl(): FormControl<boolean | null> {
     return this.planControls.controls.billingCycle;
   }

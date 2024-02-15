@@ -1,74 +1,17 @@
-<app-stepper [linear]="true" #stepper>
-  <!-- STEP 1 ********************************************************************************** -->
+<app-stepper linear #stepper>
   <cdk-step label="Your Info" [stepControl]="personalInfo.credentialControls">
     <app-personal-info #personalInfo />
   </cdk-step>
-  <!-- STEP 2 ********************************************************************************** -->
-  <cdk-step label="Select Plan" [stepControl]="planControls">
-    <app-heading [heading]="headings[1].heading" [subheading]="headings[1].subheading" />
-    <form class="form" [formGroup]="planControls">
-      <label *ngFor="let plan of plans">
-        <input type="radio" [value]="plan" formControlName="plan">
-        <ng-container [ngComponentOutlet]="plan.icon" />
-        <div>
-          <span>{{ plan.name }}</span>
-          <span>{{ plan.price | price:isMonthlyBilling }}</span>
-          <span *ngIf="!isMonthlyBilling">2 months free</span>
-        </div>
-      </label>
-      <div>
-        <button type="button" (click)="setBillingCycle(true)">Monthly</button>
-        <input type="checkbox" formControlName="billingCycle">
-        <button type="button" (click)="setBillingCycle(false)">Yearly</button>
-      </div>
-      <div class="g-button-container">
-        <app-back-button />
-        <app-next-button />
-      </div>
-    </form>
+
+  <cdk-step label="Select Plan" [stepControl]="planSelection.formGroup">
+    <app-plan-selection #planSelection />
   </cdk-step>
-  <!-- STEP 3 ********************************************************************************** -->
+
   <cdk-step label="Add-Ons" optional>
-    <app-heading [heading]="headings[2].heading" [subheading]="headings[2].subheading" />
-    <form class="form">
-      <label *ngFor="let addOn of addOns">
-        <input type="checkbox" [checked]="addOn.selected" (change)="toggleAddOn(addOn)">
-        <div>
-          <span>{{ addOn.name }}</span>
-          <span>{{ addOn.description }}</span>
-        </div>
-        <span>{{ addOn.price | price:isMonthlyBilling:PLUS }}</span>
-      </label>
-      <div class="g-button-container">
-        <app-back-button />
-        <app-next-button />
-      </div>
-    </form>
+    <app-add-on />
   </cdk-step>
-  <!-- STEP 4 ********************************************************************************** -->
+
   <cdk-step label="Summary">
-    <app-heading [heading]="headings[3].heading" [subheading]="headings[3].subheading" />
-    <div *ngIf="planControls.controls.plan.value as plan">
-      <div>
-        <span>{{ plan.name }} ({{ isMonthlyBilling ? 'Monthly' : 'Yearly' }})</span>
-        <button type="button" (click)="stepper.selectedIndex = 1">Change</button>
-      </div>
-      <span>{{ plan.price | price:isMonthlyBilling }}</span>
-    </div>
-    <ng-container *ngIf="selectedAddOns.length">
-      <hr>
-      <div *ngFor="let addOn of selectedAddOns">
-        <span>{{ addOn.name }}</span>
-        <span>{{ addOn.price | price:isMonthlyBilling:PLUS }}</span>
-      </div>
-    </ng-container>
-    <div class="total">
-      <span>Total (per {{ isMonthlyBilling ? 'month' : 'year' }})</span>
-      <span>{{ totalPrice | price:isMonthlyBilling }}</span>
-    </div>
-    <div class="g-button-container">
-      <app-back-button />
-      <app-confirm-button />
-    </div>
+    <app-summary (changePlan)="stepper.selectedIndex = 1" />
   </cdk-step>
 </app-stepper>

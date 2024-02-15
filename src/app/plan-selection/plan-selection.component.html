@@ -1,0 +1,21 @@
+<app-heading [heading]="HEADING" [subheading]="SUBHEADING" />
+<form [formGroup]="formGroup">
+  <label *ngFor="let plan of plans">
+    <input type="radio" [value]="plan" formControlName="plan">
+    <ng-container [ngComponentOutlet]="plan.icon" />
+    <div>
+      <span>{{ plan.name }}</span>
+      <span>{{ plan.price | price:isMonthlyBilling }}</span>
+      <span *ngIf="!isMonthlyBilling">2 months free</span>
+    </div>
+  </label>
+  <div>
+    <button type="button" (click)="billingCycleControl.setValue(true)">Monthly</button>
+    <input type="checkbox" formControlName="billingCycle">
+    <button type="button" (click)="billingCycleControl.setValue(false)">Yearly</button>
+  </div>
+  <div class="g-button-container">
+    <app-back-button />
+    <app-next-button />
+  </div>
+</form>

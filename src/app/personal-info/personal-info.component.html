@@ -1,5 +1,6 @@
 <app-heading [heading]="HEADING" [subheading]="SUBHEADING" />
-<form class="credential-form" [formGroup]="credentialControls" #credentialForm="ngForm">
+<form class="credential-form" [formGroup]="credentialControls" #credentialForm="ngForm"
+    (ngSubmit)="formSubmitted = true">
   <!-- Name Label ****************************************************************************** -->
   <label>
     <div class="label g-typo-body-m">

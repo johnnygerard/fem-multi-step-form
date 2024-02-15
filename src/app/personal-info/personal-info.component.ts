@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroupDirective, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HeadingComponent } from '../heading/heading.component';
 import { NextButtonComponent } from '../next-button/next-button.component';
 
@@ -20,8 +20,8 @@ import { NextButtonComponent } from '../next-button/next-button.component';
 export class PersonalInfoComponent {
   readonly HEADING = 'Personal info';
   readonly SUBHEADING = 'Please provide your name, email address, and phone number.';
-  @ViewChild('credentialForm') credentialForm?: FormGroupDirective;
 
+  formSubmitted = false;
   credentialControls = this._formBuilder.group({
     name: ['', Validators.required],
     email: ['', [
@@ -42,8 +42,6 @@ export class PersonalInfoComponent {
   }
 
   #isErrorDisplayed(errorName: string, control: FormControl): boolean {
-    const formSubmitted = this.credentialForm?.submitted ?? false;
-
-    return control.hasError(errorName) && (control.touched || formSubmitted);
+    return control.hasError(errorName) && (control.touched || this.formSubmitted);
   }
 }

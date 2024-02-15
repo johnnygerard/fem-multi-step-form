@@ -1,0 +1,27 @@
+<app-heading [heading]="HEADING" [subheading]="SUBHEADING" />
+<div *ngIf="plan$ | async as plan">
+  <div>
+    <span>{{ plan.name }} ({{ isMonthlyBilling ? 'Monthly' : 'Yearly' }})</span>
+    <button type="button" (click)="changePlan.emit()">Change</button>
+  </div>
+  <span>{{ plan.price | price:isMonthlyBilling }}</span>
+</div>
+<ng-container *ngIf="selectedAddOns$ | async as selectedAddOns">
+  <ng-container *ngIf="selectedAddOns.length">
+    <hr>
+    <div *ngFor="let addOn of selectedAddOns">
+      <span>{{ addOn.name }}</span>
+      <span>{{ addOn.price | price:isMonthlyBilling:'+' }}</span>
+    </div>
+  </ng-container>
+</ng-container>
+<div class="total">
+  <span>Total (per {{ isMonthlyBilling ? 'month' : 'year' }})</span>
+  <span *ngIf="totalPrice$ | async as totalPrice">
+    {{ totalPrice | price:isMonthlyBilling }}
+  </span>
+</div>
+<div class="g-button-container">
+  <app-back-button />
+  <app-confirm-button />
+</div>

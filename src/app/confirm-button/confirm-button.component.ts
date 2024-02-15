@@ -15,9 +15,9 @@ import { SubscriptionService } from '../subscription.service';
 })
 export class ConfirmButtonComponent {
   subscribe(): void {
-    this._subscriptionService.isSubscribed$.next(true);
-    this._subscriptionService.isSubscribed$.complete();
+    this._subService.isSubscribed$.next(true);
+    this._subService.isSubscribed$.complete();
   }
 
-  constructor(private _subscriptionService: SubscriptionService) { }
+  constructor(private _subService: SubscriptionService) { }
 }

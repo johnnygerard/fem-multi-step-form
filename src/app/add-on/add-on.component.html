@@ -1,0 +1,17 @@
+<app-heading [heading]="HEADING" [subheading]="SUBHEADING" />
+<form [formGroup]="formGroup">
+  <ng-container formArrayName="addOnControls">
+    <label *ngFor="let addOn of addOns; index as i">
+      <input type="checkbox" [formControlName]="i">
+      <div>
+        <span>{{ addOn.name }}</span>
+        <span>{{ addOn.description }}</span>
+      </div>
+      <span>{{ addOn.price | price : (isMonthlyBilling$ | async)! : '+' }}</span>
+    </label>
+  </ng-container>
+  <div class="g-button-container">
+    <app-back-button />
+    <app-next-button />
+  </div>
+</form>

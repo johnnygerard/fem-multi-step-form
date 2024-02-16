@@ -1,3 +1,140 @@
+@use 'sass:map';
+@use 'index' as *;
+
 :host {
   display: block;
+}
+
+.plan-label-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  @include desktop {
+    flex-direction: row;
+    gap: 18px;
+  }
+}
+
+.plan-label {
+  border-radius: 8px;
+  border: 1px solid map.get($palette, 'border');
+  background: map.get($palette, 'white');
+
+  @include desktop {
+    flex: 1;
+  }
+}
+
+.plan-label-content {
+  display: flex;
+  gap: 14px;
+  padding: 14px 16px 18px;
+
+  @include desktop {
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px 16px;
+  }
+}
+
+.plan-info {
+  @include desktop {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.plan-name {
+  color: map.get($palette, 'denim');
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.plan-price {
+  color: map.get($palette, 'gray');
+  font-size: 14px;
+  line-height: 20px;
+
+  @include mobile {
+    margin-top: 8px;
+  }
+}
+
+.plan-discount {
+  color: map.get($palette, 'denim');
+  font-size: 12px;
+  line-height: 20px;
+
+  @include mobile {
+    margin-top: 4px;
+  }
+
+  @include desktop {
+    line-height: normal;
+  }
+}
+
+.icon {
+  @include mobile {
+    position: relative;
+    top: 4px;
+  }
+}
+
+.billing-controls {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  padding: 14px 0;
+  gap: 24px;
+  border-radius: 8px;
+  background: map.get($palette, 'very-light-gray');
+
+  @include desktop {
+    margin-top: 32px;
+  }
+}
+
+.billing-button {
+  color: map.get($palette, 'gray');
+  font-size: 14px;
+  font-weight: 500;
+
+  &:is(.active, :hover, :focus-visible) {
+    color: map.get($palette, 'denim');
+  }
+}
+
+.billing-switch,
+.plan-label {
+  position: relative;
+}
+
+.billing-switch-input,
+.plan-label-input {
+  appearance: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.plan-label {
+  &:is(:hover, :focus-within) {
+    border-color: map.get($palette, 'purple');
+  }
+
+  &.active {
+    background-color: map.get($palette, 'very-light-gray');
+    border-color: map.get($palette, 'purple');
+  }
+
+  &-input {
+    outline: none;
+  }
 }

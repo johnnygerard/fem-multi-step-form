@@ -1,18 +1,37 @@
 <app-heading [heading]="HEADING" [subheading]="SUBHEADING" />
 <form [formGroup]="formGroup">
-  <label *ngFor="let plan of plans">
-    <input type="radio" [value]="plan" formControlName="plan">
-    <ng-container [ngComponentOutlet]="plan.icon" />
-    <div>
-      <span>{{ plan.name }}</span>
-      <span>{{ plan.price | price:isMonthlyBilling }}</span>
-      <span *ngIf="!isMonthlyBilling">2 months free</span>
-    </div>
-  </label>
-  <div>
-    <button type="button" (click)="billingCycleControl.setValue(true)">Monthly</button>
-    <input type="checkbox" formControlName="billingCycle">
-    <button type="button" (click)="billingCycleControl.setValue(false)">Yearly</button>
+  <div class="plan-label-container">
+    <label class="plan-label" [class.active]="formGroup.controls.plan.value === plan"
+        *ngFor="let plan of plans">
+      <input class="plan-label-input" type="radio" [value]="plan" formControlName="plan">
+      <div class="plan-label-content">
+        <div class="icon">
+          <ng-container [ngComponentOutlet]="plan.icon" />
+        </div>
+        <div class="plan-info">
+          <div class="plan-name">{{ plan.name }}</div>
+          <div class="plan-price">{{ plan.price | price:isMonthlyBilling }}</div>
+          <div class="plan-discount" *ngIf="!isMonthlyBilling">2 months free</div>
+        </div>
+      </div>
+    </label>
+  </div>
+  <div class="billing-controls">
+    <button class="billing-button" [class.active]="isMonthlyBilling" type="button"
+        (click)="billingCycleControl.setValue(true)">
+      Monthly
+    </button>
+    <label class="billing-switch">
+      <input class="billing-switch-input" type="checkbox" formControlName="billingCycle">
+      <svg width="38" height="20" viewBox="0 0 38 20" fill="none">
+        <rect width="38" height="20" rx="10" fill="#022959" />
+        <circle [attr.cx]="isMonthlyBilling ? 10 : 28" cy="10" r="6" fill="white" />
+      </svg>
+    </label>
+    <button class="billing-button" [class.active]="!isMonthlyBilling" type="button"
+        (click)="billingCycleControl.setValue(false)">
+      Yearly
+    </button>
   </div>
   <div class="g-button-container">
     <app-back-button />

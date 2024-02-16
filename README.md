@@ -1,7 +1,7 @@
 # Frontend Mentor | Multi-step form
 This is my solution to the [Multi-step form challenge](https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ) from [Frontend Mentor](https://www.frontendmentor.io/).
 
-[![project status](https://img.shields.io/badge/status-solution%20published-success?style=for-the-badge)](https://fem-multi-step-form-jgerard.vercel.app)
+[![project status](https://img.shields.io/badge/status-solution%20published-success?style=for-the-badge)](https://www.frontendmentor.io/solutions/multistep-form-with-angular-material-cdk-stepper-LyjPtXR1ez)
 
 
  ## Tech Stack
@@ -27,7 +27,7 @@ This is my solution to the [Multi-step form challenge](https://www.frontendmento
 
 ## Links
  - [Website](https://fem-multi-step-form-jgerard.vercel.app) hosted with [Vercel](https://vercel.com/)
- <!-- - [Solution]() -->
+ - [Solution](https://www.frontendmentor.io/solutions/multistep-form-with-angular-material-cdk-stepper-LyjPtXR1ez)
 
 ## Screenshots
 ### Mobile

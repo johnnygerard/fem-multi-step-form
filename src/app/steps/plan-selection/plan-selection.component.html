@@ -22,7 +22,8 @@
       Monthly
     </button>
     <label class="billing-switch">
-      <input class="billing-switch-input" type="checkbox" formControlName="billingCycle">
+      <input class="billing-switch-input" type="checkbox" formControlName="billingCycle"
+          aria-label="Switch billing cycles">
       <svg width="38" height="20" viewBox="0 0 38 20" fill="none">
         <rect width="38" height="20" rx="10" fill="#022959" />
         <circle [attr.cx]="isMonthlyBilling ? 10 : 28" cy="10" r="6" fill="white" />

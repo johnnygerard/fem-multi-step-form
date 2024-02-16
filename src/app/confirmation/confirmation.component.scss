@@ -1,24 +1,16 @@
 @use 'index' as *;
 
 :host {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
-
-  @include mobile {
-    margin: 48px 0;
-  }
+  height: 336px;
 
   @include desktop {
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
   }
-}
-
-.check-icon {
-  display: flex;
-  justify-content: center;
 }
 
 .heading {

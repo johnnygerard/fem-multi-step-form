@@ -39,6 +39,10 @@
     @include desktop {
       margin-top: 8px;
     }
+
+    &:is(:hover, :focus-visible) {
+      color: map.get($palette, 'purple');
+    }
   }
 
   &-price {

@@ -1,8 +1,8 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { HeadingComponent } from '../heading/heading.component';
-import { BackButtonComponent } from '../back-button/back-button.component';
-import { ConfirmButtonComponent } from '../confirm-button/confirm-button.component';
+import { BackButtonComponent } from '../buttons/back-button/back-button.component';
+import { ConfirmButtonComponent } from '../buttons/confirm-button/confirm-button.component';
 import { PricePipe } from '../price.pipe';
 import { SubscriptionService } from '../subscription.service';
 

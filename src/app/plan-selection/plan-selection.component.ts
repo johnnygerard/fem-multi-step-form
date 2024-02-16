@@ -1,10 +1,10 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BackButtonComponent } from '../back-button/back-button.component';
+import { BackButtonComponent } from '../buttons/back-button/back-button.component';
 import { plans } from '../data/plan.array';
 import { HeadingComponent } from '../heading/heading.component';
-import { NextButtonComponent } from '../next-button/next-button.component';
+import { NextButtonComponent } from '../buttons/next-button/next-button.component';
 import { PricePipe } from '../price.pipe';
 import { SubscriptionService } from '../subscription.service';
 import { Plan } from '../types/plan.class';

@@ -1,8 +1,8 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { HeadingComponent } from '../heading/heading.component';
-import { BackButtonComponent } from '../back-button/back-button.component';
-import { NextButtonComponent } from '../next-button/next-button.component';
+import { BackButtonComponent } from '../buttons/back-button/back-button.component';
+import { NextButtonComponent } from '../buttons/next-button/next-button.component';
 import { PricePipe } from '../price.pipe';
 import { AddOn } from '../types/add-on.class';
 import { addOns } from '../data/add-on.array';

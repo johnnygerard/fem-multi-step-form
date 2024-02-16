@@ -39,9 +39,10 @@
 }
 
 .plan-info {
+  display: flex;
+  flex-direction: column;
+
   @include desktop {
-    display: flex;
-    flex-direction: column;
     gap: 8px;
   }
 }

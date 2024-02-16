@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, combineLatestWith, map } from 'rxjs';
-import { Plan } from './types/plan.class';
-import { AddOn } from './types/add-on.class';
+import { BehaviorSubject, Observable, combineLatestWith, map } from 'rxjs';
+import { Plan } from '../types/plan.class';
+import { AddOn } from '../types/add-on.class';
 
 @Injectable({
   providedIn: 'root'

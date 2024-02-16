@@ -1,10 +1,10 @@
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AddOnComponent } from './add-on/add-on.component';
-import { PersonalInfoComponent } from './personal-info/personal-info.component';
-import { PlanSelectionComponent } from './plan-selection/plan-selection.component';
+import { AddOnComponent } from './steps/add-on/add-on.component';
+import { PersonalInfoComponent } from './steps/personal-info/personal-info.component';
+import { PlanSelectionComponent } from './steps/plan-selection/plan-selection.component';
 import { StepperComponent } from './stepper/stepper.component';
-import { SummaryComponent } from './summary/summary.component';
+import { SummaryComponent } from './steps/summary/summary.component';
 
 @Component({
   selector: 'app-root',

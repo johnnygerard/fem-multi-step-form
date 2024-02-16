@@ -5,10 +5,10 @@
         *ngFor="let addOn of addOns; index as i">
       <ng-container [ngTemplateOutlet]="addOnControls.value[i] ? checkedBox : uncheckedBox" />
       <input class="addon-checkbox" type="checkbox" [formControlName]="i">
-      <div class="addon-info">
-        <div class="addon-info-name">{{ addOn.name }}</div>
-        <div class="addon-info-description">{{ addOn.description }}</div>
-      </div>
+      <span class="addon-info">
+        <span class="addon-info-name">{{ addOn.name }}</span>
+        <span class="addon-info-description">{{ addOn.description }}</span>
+      </span>
       <span class="addon-price">
         {{ addOn.price | price : (isMonthlyBilling$ | async)! : '+' }}
       </span>

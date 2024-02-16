@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { SubscriptionService } from '../subscription.service';
+import { SubscriptionService } from '../../subscription.service';
 
 @Component({
   selector: 'app-confirm-button',

@@ -67,9 +67,13 @@
 }
 
 .addon-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   margin-left: 16px;
 
   @include desktop {
+    gap: 8px;
     margin-left: 24px;
   }
 
@@ -84,16 +88,12 @@
   }
 
   &-description {
-    margin-top: 4px;
-
     // Typography
     color: map.get($palette, 'gray');
     font-size: 12px;
     line-height: 20px;
 
     @include desktop {
-      margin-top: 8px;
-
       // Typography
       font-size: 14px;
     }

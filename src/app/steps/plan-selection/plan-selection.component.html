@@ -4,16 +4,16 @@
     <label class="plan-label" [class.active]="formGroup.controls.plan.value === plan"
         *ngFor="let plan of plans">
       <input class="plan-label-input" type="radio" [value]="plan" formControlName="plan">
-      <div class="plan-label-content">
-        <div class="icon">
+      <span class="plan-label-content">
+        <span class="icon">
           <ng-container [ngComponentOutlet]="plan.icon" />
-        </div>
-        <div class="plan-info">
-          <div class="plan-name">{{ plan.name }}</div>
-          <div class="plan-price">{{ plan.price | price:isMonthlyBilling }}</div>
-          <div class="plan-discount" *ngIf="!isMonthlyBilling">2 months free</div>
-        </div>
-      </div>
+        </span>
+        <span class="plan-info">
+          <span class="plan-name">{{ plan.name }}</span>
+          <span class="plan-price">{{ plan.price | price:isMonthlyBilling }}</span>
+          <span class="plan-discount" *ngIf="!isMonthlyBilling">2 months free</span>
+        </span>
+      </span>
     </label>
   </div>
   <div class="billing-controls">

@@ -3,17 +3,17 @@
     (ngSubmit)="formSubmitted = true">
   <!-- Name Label ****************************************************************************** -->
   <label>
-    <div class="label g-typo-body-m">
+    <span class="label g-typo-body-m">
       <span>Name</span>
       <ng-container *ngIf="isRequired(credentialControls.controls.name)">
         <ng-container *ngTemplateOutlet="required" />
       </ng-container>
-    </div>
+    </span>
     <input class="credential-input" formControlName="name" placeholder="e.g. Stephen King">
   </label>
   <!-- Email Label ***************************************************************************** -->
   <label>
-    <div class="label g-typo-body-m">
+    <span class="label g-typo-body-m">
       <span>Email Address</span>
       <ng-container *ngIf="isRequired(credentialControls.controls.email)">
         <ng-container *ngTemplateOutlet="required" />
@@ -21,18 +21,18 @@
       <ng-container *ngIf="isEmailInvalid(credentialControls.controls.email)">
         <span class="error">Invalid email</span>
       </ng-container>
-    </div>
+    </span>
     <input class="credential-input" type="email" formControlName="email"
         placeholder="e.g. stephenking@lorem.com">
   </label>
   <!-- Phone Label ***************************************************************************** -->
   <label>
-    <div class="label g-typo-body-m">
+    <span class="label g-typo-body-m">
       <span>Phone Number</span>
       <ng-container *ngIf="isRequired(credentialControls.controls.phone)">
         <ng-container *ngTemplateOutlet="required" />
       </ng-container>
-    </div>
+    </span>
     <input class="credential-input" type="tel" formControlName="phone"
         placeholder="e.g. +1 234 567 890">
   </label>

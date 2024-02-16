@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HeadingComponent } from '../heading/heading.component';
-import { NextButtonComponent } from '../buttons/next-button/next-button.component';
+import { HeadingComponent } from '../../heading/heading.component';
+import { NextButtonComponent } from '../../buttons/next-button/next-button.component';
 
 @Component({
   selector: 'app-personal-info',

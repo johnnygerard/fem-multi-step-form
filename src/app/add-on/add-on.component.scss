@@ -1,3 +1,101 @@
+@use 'sass:map';
+@use 'index' as *;
+
 :host {
   display: block;
+}
+
+.addon-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  @include desktop {
+    gap: 16px;
+  }
+}
+
+.addon-label,
+.addon-checkbox {
+  border-radius: 8px;
+}
+
+.addon-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px 10px;
+
+  @include desktop {
+    padding: 24px 18px;
+  }
+
+  &:is(:hover, .active) .addon-checkbox,
+  .addon-checkbox:focus-visible {
+    border-color: map.get($palette, 'purple');
+  }
+
+  &.active {
+    background: map.get($palette, 'very-light-gray');
+  }
+}
+
+.addon-checkbox {
+  appearance: none;
+  outline: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  border: 1px solid map.get($palette, 'border');
+}
+
+.addon-price {
+  margin-left: auto;
+
+  // Typography
+  color: map.get($palette, 'purple');
+  font-size: 12px;
+  line-height: 20px;
+
+  @include desktop {
+    // Typography
+    font-size: 14px;
+  }
+}
+
+.addon-info {
+  margin-left: 16px;
+
+  @include desktop {
+    margin-left: 24px;
+  }
+
+  &-name {
+    color: map.get($palette, 'denim');
+    font-size: 14px;
+    font-weight: 500;
+
+    @include desktop {
+      font-size: 16px;
+    }
+  }
+
+  &-description {
+    margin-top: 4px;
+
+    // Typography
+    color: map.get($palette, 'gray');
+    font-size: 12px;
+    line-height: 20px;
+
+    @include desktop {
+      margin-top: 8px;
+
+      // Typography
+      font-size: 14px;
+    }
+  }
 }

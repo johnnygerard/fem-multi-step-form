@@ -40,12 +40,16 @@ export class AddOnComponent {
     private _formBuilder: FormBuilder,
     private _subService: SubscriptionService,
   ) {
-    this.formGroup.controls.addOnControls.valueChanges.subscribe(
+    this.addOnControls.valueChanges.subscribe(
       addOnsAreSelected => {
         this._subService.selectedAddOns$.next(
           addOns.filter((_addOn, index) => addOnsAreSelected[index])
         );
       }
     );
+  }
+
+  get addOnControls() {
+    return this.formGroup.controls.addOnControls;
   }
 }

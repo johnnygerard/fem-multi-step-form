@@ -1,0 +1,34 @@
+<app-heading [heading]="HEADING" [subheading]="SUBHEADING" />
+<form [formGroup]="formGroup">
+  <div class="addon-container" formArrayName="addOnControls">
+    <label class="addon-label" [class.active]="addOnControls.value[i]"
+        *ngFor="let addOn of addOns; index as i">
+      <ng-container [ngTemplateOutlet]="addOnControls.value[i] ? checkedBox : uncheckedBox" />
+      <input class="addon-checkbox" type="checkbox" [formControlName]="i">
+      <div class="addon-info">
+        <div class="addon-info-name">{{ addOn.name }}</div>
+        <div class="addon-info-description">{{ addOn.description }}</div>
+      </div>
+      <span class="addon-price">
+        {{ addOn.price | price : (isMonthlyBilling$ | async)! : '+' }}
+      </span>
+    </label>
+  </div>
+  <div class="g-button-container">
+    <app-back-button />
+    <app-next-button />
+  </div>
+</form>
+
+<ng-template #uncheckedBox>
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <rect x="0.5" y="0.5" width="19" height="19" rx="3.5" stroke="#D6D9E6" />
+  </svg>
+</ng-template>
+
+<ng-template #checkedBox>
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <rect width="20" height="20" rx="4" fill="#483EFF" />
+    <path d="M5 10L8.43298 13.433L14.866 7" stroke="white" stroke-width="2" />
+  </svg>
+</ng-template>

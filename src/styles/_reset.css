@@ -10,7 +10,6 @@
 }
 
 body {
-  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -42,8 +41,7 @@ h6 {
 
 /* End of Josh's Custom CSS Reset */
 
-html,
-body {
+html {
   min-height: 100%;
 }
 

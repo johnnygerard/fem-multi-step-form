@@ -1,3 +1,114 @@
+@use 'sass:map';
 @use 'reset';
 @use 'fonts';
 @use 'index' as *;
+
+html {
+  position: relative;
+  min-width: 300px;
+}
+
+body {
+  font-family: "Ubuntu", sans-serif;
+  background-color: map.get($palette, 'background');
+
+  // Center content horizontally
+  display: flex;
+  justify-content: center;
+
+  @include mobile {
+    padding: 0 16px;
+  }
+
+  @include desktop {
+    // Center content vertically
+    min-height: 100vh;
+    align-items: center;
+  }
+}
+
+.g-typo-heading {
+  color: map.get($palette, 'denim');
+  font-weight: 700;
+  font-size: 24px;
+
+  @include desktop {
+    font-size: 32px;
+  }
+}
+
+.g-typo-body-l {
+  color: map.get($palette, 'gray');
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.g-typo-body-m {
+  color: map.get($palette, 'denim');
+  font-size: 12px;
+
+  @include desktop {
+    font-size: 14px;
+  }
+}
+
+.g-button {
+  // Typography
+  font-size: 14px;
+  font-weight: 500;
+
+  @include desktop {
+    // Typography
+    font-size: 16px;
+  }
+}
+
+.g-flat-button {
+  @extend .g-button;
+  color: map.get($palette, 'white');
+
+  // Center text
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 96px;
+  height: 40px;
+  border-radius: 4px;
+
+  @include desktop {
+    width: 124px;
+    height: 48px;
+    border-radius: 8px;
+  }
+}
+
+.g-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  @include mobile {
+    background-color: map.get($palette, 'white');
+    padding: 16px;
+  }
+
+  @include desktop {
+    bottom: 16px;
+  }
+}
+
+.g-check-svg {
+  width: 56px;
+  height: 56px;
+
+  @include desktop {
+    width: 80px;
+    height: 80px;
+  }
+}

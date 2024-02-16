@@ -1,17 +1,31 @@
 @mixin mobile {
-  @media (max-width: 767px) {
-    @content;
-  }
-}
-
-@mixin tablet {
-  @media (min-width: 768px) and (max-width: 1439px) {
+  @media (max-width: 1003px) {
     @content;
   }
 }
 
 @mixin desktop {
-  @media (min-width: 1440px) {
+  @media (min-width: 1004px) {
     @content;
   }
 }
+
+$palette: (
+  'background': #EFF5FF,
+  'border': #D6D9E6,
+  'button-next-interactive': #164A8A,
+  'button-confirm-interactive': #928CFF,
+  'denim': #022959,
+  'gray': #9699AA,
+  'light-blue': #ABBCFF,
+  'orange': #FFAF7E,
+  'pink': #F9818E,
+  'purple': #483EFF,
+  'error': #EE374A,
+  'sky-blue': #BEE2FD,
+  'very-light-gray': #F8F9FF,
+  'white': #FFFFFF,
+);
+
+$svg-background-desktop: url('/assets/images/background-desktop.svg');
+$svg-background-mobile: url('/assets/images/background-mobile.svg');

@@ -1,0 +1,22 @@
+@use 'index' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 336px;
+
+  @include desktop {
+    height: 100%;
+  }
+}
+
+.heading {
+  margin: 24px 0 8px;
+
+  @include desktop {
+    margin: 32px 0 14px;
+  }
+}

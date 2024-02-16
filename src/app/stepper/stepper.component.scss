@@ -45,6 +45,12 @@
     align-items: center;
     gap: 16px;
   }
+
+  &.active .step-number {
+    background: map.get($palette, 'sky-blue');
+    color: map.get($palette, 'denim');
+    border: none;
+  }
 }
 
 .step-number {

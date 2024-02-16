@@ -1,13 +1,18 @@
 # Frontend Mentor | Multi-step form
 This is my solution to the [Multi-step form challenge](https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ) from [Frontend Mentor](https://www.frontendmentor.io/).
 
-[![project status](https://img.shields.io/badge/status-work%20in%20progress-red?style=for-the-badge)](https://fem-multi-step-form-jgerard.vercel.app)
+[![project status](https://img.shields.io/badge/status-solution%20published-success?style=for-the-badge)](https://fem-multi-step-form-jgerard.vercel.app)
+
 
  ## Tech Stack
 - Angular 17
 - Sass
+- RxJS
 
 ## Main Features
+- Angular Material [CDK stepper](https://material.angular.io/cdk/stepper/overview)
+- Angular Reactive Forms
+- Custom form controls
 - Standalone components
 - Self-hosted fonts (downloaded from [Google Fonts](https://fonts.google.com))
 - Bash automation (see [PR #1](../../pull/1))
@@ -24,13 +29,11 @@ This is my solution to the [Multi-step form challenge](https://www.frontendmento
  - [Website](https://fem-multi-step-form-jgerard.vercel.app) hosted with [Vercel](https://vercel.com/)
  <!-- - [Solution]() -->
 
-<!-- ## Screenshots
-### Desktop
-![desktop screenshot](screenshots/desktop.webp)
-### Tablet
-![tablet screenshot](screenshots/tablet.webp)
+## Screenshots
 ### Mobile
-![mobile screenshot](screenshots/mobile.webp) -->
+![mobile screenshot](screenshots/mobile.avif)
+### Desktop
+![desktop screenshot](screenshots/desktop.avif)
 
 ## About Frontend Mentor
 [Frontend Mentor](https://www.frontendmentor.io/) challenges help you improve your coding skills by building realistic projects.

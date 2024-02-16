@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CdkStepper, CdkStepperModule } from '@angular/cdk/stepper';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { SubscriptionService } from '../subscription.service';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
 
 @Component({
   selector: 'app-stepper',
@@ -9,6 +10,7 @@ import { SubscriptionService } from '../subscription.service';
   imports: [
     CommonModule,
     CdkStepperModule,
+    ConfirmationComponent,
     AsyncPipe,
   ],
   providers: [

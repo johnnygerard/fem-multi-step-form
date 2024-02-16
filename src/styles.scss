@@ -102,3 +102,13 @@ body {
     bottom: 16px;
   }
 }
+
+.g-check-svg {
+  width: 56px;
+  height: 56px;
+
+  @include desktop {
+    width: 80px;
+    height: 80px;
+  }
+}

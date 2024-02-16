@@ -1,0 +1,30 @@
+@use 'index' as *;
+
+:host {
+  display: block;
+  text-align: center;
+
+  @include mobile {
+    margin: 48px 0;
+  }
+
+  @include desktop {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.check-icon {
+  display: flex;
+  justify-content: center;
+}
+
+.heading {
+  margin: 24px 0 8px;
+
+  @include desktop {
+    margin: 32px 0 14px;
+  }
+}

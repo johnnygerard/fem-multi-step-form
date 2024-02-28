@@ -9,7 +9,8 @@
         <ng-container *ngTemplateOutlet="required" />
       </ng-container>
     </span>
-    <input class="credential-input" formControlName="name" placeholder="e.g. Stephen King">
+    <input class="credential-input" data-test="name-input" formControlName="name"
+        placeholder="e.g. Stephen King">
   </label>
   <!-- Email Label ***************************************************************************** -->
   <label>
@@ -22,7 +23,7 @@
         <span class="error">Invalid email</span>
       </ng-container>
     </span>
-    <input class="credential-input" type="email" formControlName="email"
+    <input class="credential-input" data-test="email-input" type="email" formControlName="email"
         placeholder="e.g. stephenking@lorem.com">
   </label>
   <!-- Phone Label ***************************************************************************** -->
@@ -33,7 +34,7 @@
         <ng-container *ngTemplateOutlet="required" />
       </ng-container>
     </span>
-    <input class="credential-input" type="tel" formControlName="phone"
+    <input class="credential-input" data-test="phone-input" type="tel" formControlName="phone"
         placeholder="e.g. +1 234 567 890">
   </label>
   <!-- Next Button ***************************************************************************** -->

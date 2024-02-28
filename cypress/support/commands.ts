@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-namespace */
 // ***********************************************
 // This example namespace declaration will help
 // with Intellisense and code completion in your
@@ -41,3 +42,10 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+declare namespace Cypress {
+  interface Chainable {
+    getByData(dataTestAttribute: string): Chainable<JQuery<HTMLElement>>
+  }
+}
+
+Cypress.Commands.add("getByData", attrValue => cy.get(`[data-test="${attrValue}"]`));

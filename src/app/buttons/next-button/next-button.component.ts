@@ -7,7 +7,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   imports: [
     CdkStepperNext,
   ],
-  template: `<button class="g-flat-button" cdkStepperNext>Next Step</button>`,
+  template: `
+    <button class="g-flat-button" data-test="next-button" cdkStepperNext>
+      Next Step
+    </button>
+  `,
   styleUrl: './next-button.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

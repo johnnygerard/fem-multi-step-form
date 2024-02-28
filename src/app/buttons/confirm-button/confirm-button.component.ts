@@ -6,7 +6,7 @@ import { SubscriptionService } from '../../subscription.service';
   standalone: true,
   imports: [],
   template: `
-    <button class="g-flat-button" type="button" (click)="subscribe()">
+    <button class="g-flat-button" data-test="confirm-button" type="button" (click)="subscribe()">
       Confirm
     </button>
   `,

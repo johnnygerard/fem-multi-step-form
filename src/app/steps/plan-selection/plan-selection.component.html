@@ -3,7 +3,8 @@
   <div class="plan-label-container">
     <label class="plan-label" [class.active]="formGroup.controls.plan.value === plan"
         *ngFor="let plan of plans">
-      <input class="plan-label-input" type="radio" [value]="plan" formControlName="plan">
+      <input class="plan-label-input" data-test="plan-input" type="radio" [value]="plan"
+          formControlName="plan">
       <span class="plan-label-content">
         <span class="icon">
           <ng-container [ngComponentOutlet]="plan.icon" />

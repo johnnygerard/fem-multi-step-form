@@ -11,5 +11,14 @@ describe('Main User Journey', () => {
     cy.getByData('next-button').click();
 
     // Step 2
+    cy.getByData('plan-input').first().check();
+    cy.getByData('next-button').click();
+
+    // Step 3 (optional)
+    cy.getByData('next-button').click();
+
+    // Step 4
+    cy.getByData('confirm-button').click();
+    cy.getByData('confirmation-message').should('be.visible');
   });
 });

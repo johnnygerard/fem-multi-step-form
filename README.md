@@ -11,7 +11,8 @@ This is my solution to the [Multi-step form challenge](https://www.frontendmento
 
 ## Main Features
 - Angular Material [CDK stepper](https://material.angular.io/cdk/stepper/overview)
-- Angular Reactive Forms
+- Angular reactive forms
+- [Cypress](https://www.cypress.io/) E2E testing
 - Custom form controls
 - Standalone components
 - Self-hosted fonts (downloaded from [Google Fonts](https://fonts.google.com))
